@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_124901) do
+ActiveRecord::Schema.define(version: 2019_06_04_131207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,26 @@ ActiveRecord::Schema.define(version: 2019_06_04_124901) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_id"], name: "index_renovations_on_asset_id"
+  end
+
+  create_table "rental_markets", force: :cascade do |t|
+    t.string "address"
+    t.integer "surface"
+    t.integer "nr_of_bedrooms"
+    t.integer "nr_of_bathrooms"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sell_markets", force: :cascade do |t|
+    t.string "address"
+    t.integer "surface"
+    t.integer "nr_of_bedrooms"
+    t.integer "nr_of_bathrooms"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,2 @@
+class SellMarket < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class RentalMarket < ApplicationRecord
+end
