@@ -1,7 +1,5 @@
 class RentalMarket < ApplicationRecord
-  validates :address, presence: true
-  validates :surface, presence: true
-  validates :nr_of_bedrooms, presence: true
-  validates :nr_of_bathrooms, presence: true
-  validates :price, presence: true
+  validates :address, :surface, :nr_of_bedrooms,
+            :nr_of_bathrooms, :price,
+            presence: true
 end
