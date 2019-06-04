@@ -10,10 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_094255) do
+ActiveRecord::Schema.define(version: 2019_06_04_124901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assets", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.integer "surface"
+    t.integer "nr_of_bedrooms"
+    t.string "type_asset"
+    t.integer "nr_of_bathrooms"
+    t.string "state"
+    t.integer "garage"
+    t.boolean "terrace"
+    t.boolean "heating"
+    t.boolean "electricity"
+    t.boolean "kitchen"
+    t.boolean "sanitation"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_assets_on_user_id"
+  end
+
+  create_table "estimates", force: :cascade do |t|
+    t.integer "market_price"
+    t.integer "rental_price"
+    t.integer "roi_rate"
+    t.integer "roi_price"
+    t.integer "loan_payment"
+    t.bigint "asset_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_estimates_on_asset_id"
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "data"
+    t.bigint "asset_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_pictures_on_asset_id"
+  end
+
+  create_table "renovations", force: :cascade do |t|
+    t.string "type"
+    t.integer "price_per_unit"
+    t.integer "quantity"
+    t.bigint "asset_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_renovations_on_asset_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +73,15 @@ ActiveRecord::Schema.define(version: 2019_06_04_094255) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "assets", "users"
+  add_foreign_key "estimates", "assets"
+  add_foreign_key "pictures", "assets"
+  add_foreign_key "renovations", "assets"
 end
