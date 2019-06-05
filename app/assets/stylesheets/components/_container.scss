@@ -1,0 +1,28 @@
+.container-landing {
+  width: 55.5%;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+.container-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.container-step {
+  color: #095228;
+}
+
+.step-text {
+  width: 70%;
+  margin-top: 1rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.fas {
+  margin-bottom: 1rem;
+}
