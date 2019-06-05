@@ -8,7 +8,7 @@ class EstimatesController < ApplicationController
   end
 
   def new
-
+     @estimate = Estimate.new
   end
 
   def create
