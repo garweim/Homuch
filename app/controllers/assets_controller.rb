@@ -46,7 +46,8 @@ class AssetsController < ApplicationController
   private
 
   def assets_params
-    params.require(:asset).permit(:address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset)
+    params.require(:asset).permit(:address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset, :name, :state,
+                                  :garage, :terrace, :heating, :electricity, :kitchen, :sanitation, :user_id)
   end
 
   def session_saved_keys
