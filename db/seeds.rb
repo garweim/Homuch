@@ -31,3 +31,24 @@ puts "create estimates"
 Estimate.create(market_price:500, rental_price:2, roi_rate:0.03, roi_price:450, loan_payment:45, asset_id: Asset.all.sample.id)
 Estimate.create(market_price:450, rental_price:3, roi_rate:0.03, roi_price:400, loan_payment:40, asset_id: Asset.all.sample.id)
 Estimate.create(market_price:520, rental_price:2, roi_rate:0.03, roi_price:460, loan_payment:46, asset_id: Asset.all.sample.id)
+
+SellMarket.destroy_all
+puts "create market prices"
+SellMarket.create(address: "Ixelles", surface:200, nr_of_bedrooms:3, nr_of_bathrooms:2, price:400000)
+SellMarket.create(address: "Ixelles", surface:200, nr_of_bedrooms:3, nr_of_bathrooms:2, price:400000)
+SellMarket.create(address: "Ixelles", surface:200, nr_of_bedrooms:3, nr_of_bathrooms:2, price:400000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
