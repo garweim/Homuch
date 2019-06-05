@@ -1,3 +1,3 @@
 class Estimate < ApplicationRecord
-  belongs_to :asset
+  belongs_to :project
 end
