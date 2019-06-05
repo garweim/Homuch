@@ -1,3 +1,3 @@
 class Picture < ApplicationRecord
-  belongs_to :asset
+  belongs_to :project
 end

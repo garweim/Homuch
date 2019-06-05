@@ -4,7 +4,7 @@ class CreateRenovations < ActiveRecord::Migration[5.2]
       t.string :type
       t.integer :price_per_unit
       t.integer :quantity
-      t.references :asset, foreign_key: true
+      t.references :project, foreign_key: true
 
       t.timestamps
     end

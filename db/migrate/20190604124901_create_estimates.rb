@@ -6,7 +6,7 @@ class CreateEstimates < ActiveRecord::Migration[5.2]
       t.integer :roi_rate
       t.integer :roi_price
       t.integer :loan_payment
-      t.references :asset, foreign_key: true
+      t.references :project, foreign_key: true
 
       t.timestamps
     end
