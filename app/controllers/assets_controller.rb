@@ -46,12 +46,12 @@ class AssetsController < ApplicationController
   private
 
   def assets_params
-    params.require(:asset).permit(:address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset, :name, :state,
+    params.require(:asset).permit(:zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset, :name, :state,
                                   :garage, :terrace, :heating, :electricity, :kitchen, :sanitation, :user_id)
   end
 
   def session_saved_keys
-    [:address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset]
+    [:zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset]
   end
 
   # def perform_analysis
