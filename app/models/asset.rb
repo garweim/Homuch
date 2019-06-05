@@ -4,7 +4,7 @@ class Asset < ApplicationRecord
   has_many :pictures, dependent: :destroy
   has_many :renovations, dependent: :destroy
   has_many :estimates, dependent: :destroy
-  validates :name, :address, :surface, :nr_of_bedrooms,
+  validates :name, :zipcode, :surface, :nr_of_bedrooms,
             :type_asset, :nr_of_bathrooms, :state, :garage,
             :heating, :electricity, :kitchen, :sanitation,
             presence: true
