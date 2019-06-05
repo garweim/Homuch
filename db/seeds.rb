@@ -15,24 +15,24 @@ User.create!(first_name: "didier", last_name: "dewasseige", email: "didier@gmail
 puts "done"
 
 
-Asset.destroy_all
-puts "create assets"
-Asset.create(name:"Asset", zipcode: 1000, surface: 150, nr_of_bedrooms: 3, type_asset: "appartment",
+Project.destroy_all
+puts "create projects"
+Project.create(name:"Project", zipcode: 1000, surface: 150, nr_of_bedrooms: 3, category: "appartment",
 nr_of_bathrooms: 1, state:"good", garage: 1, terrace: true, heating: true, electricity: true, kitchen: true, sanitation: true, user_id: User.all.sample.id)
-Asset.create(name:"Asset", zipcode: 1000, surface: 150, nr_of_bedrooms: 3, type_asset: "appartment",
+Project.create(name:"Project", zipcode: 1000, surface: 150, nr_of_bedrooms: 3, category: "appartment",
 nr_of_bathrooms: 2, state:"bad", garage: 1, terrace: true, heating: true, electricity: true, kitchen: true, sanitation: true, user_id: User.all.sample.id)
-Asset.create(name:"Asset", zipcode: 1000, surface: 200, nr_of_bedrooms: 3, type_asset: "appartment",
+Project.create(name:"Project", zipcode: 1000, surface: 200, nr_of_bedrooms: 3, category: "appartment",
 nr_of_bathrooms: 1, state:"good", garage: 1, terrace: true, heating: true, electricity: true, kitchen: true, sanitation: true, user_id: User.all.sample.id)
-Asset.create(name:"Asset", zipcode: 1000, surface: 200, nr_of_bedrooms: 3, type_asset: "appartment",
+Project.create(name:"Project", zipcode: 1000, surface: 200, nr_of_bedrooms: 3, category: "appartment",
 nr_of_bathrooms: 2, state:"bad", garage: 1, terrace: true, heating: true, electricity: true, kitchen: true, sanitation: true, user_id: User.all.sample.id)
 
 puts "done"
 
 Estimate.destroy_all
 puts "create estimates"
-Estimate.create(market_price:500, rental_price:2, roi_rate:0.03, roi_price:450, loan_payment:45, asset_id: Asset.all.sample.id)
-Estimate.create(market_price:450, rental_price:3, roi_rate:0.03, roi_price:400, loan_payment:40, asset_id: Asset.all.sample.id)
-Estimate.create(market_price:520, rental_price:2, roi_rate:0.03, roi_price:460, loan_payment:46, asset_id: Asset.all.sample.id)
+Estimate.create(market_price:500, rental_price:2, roi_rate:0.03, roi_price:450, loan_payment:45, project_id: Project.all.sample.id)
+Estimate.create(market_price:450, rental_price:3, roi_rate:0.03, roi_price:400, loan_payment:40, project_id: Project.all.sample.id)
+Estimate.create(market_price:520, rental_price:2, roi_rate:0.03, roi_price:460, loan_payment:46, project_id: Project.all.sample.id)
 
 
 
