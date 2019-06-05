@@ -48,11 +48,11 @@ class ProjectsController < ApplicationController
   private
 
   def projects_params
-    params.require(:project).permit(:address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category)
+    params.require(:project).permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category)
   end
 
   def session_saved_keys
-    [:address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
+    [:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
   end
 
   # def perform_analysis

@@ -52,28 +52,8 @@ ActiveRecord::Schema.define(version: 2019_06_05_101041) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
     t.integer "zipcode"
-  end
-
-  create_table "estimates", force: :cascade do |t|
-    t.integer "market_price"
-    t.integer "rental_price"
-    t.integer "roi_rate"
-    t.integer "roi_price"
-    t.integer "loan_payment"
-    t.bigint "asset_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["asset_id"], name: "index_estimates_on_asset_id"
-  end
-
-  create_table "pictures", force: :cascade do |t|
-    t.string "data"
-    t.bigint "asset_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["asset_id"], name: "index_pictures_on_asset_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "renovations", force: :cascade do |t|
