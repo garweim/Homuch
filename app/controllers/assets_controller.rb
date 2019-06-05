@@ -1,6 +1,6 @@
 class AssetsController < ApplicationController
-  # before_action :find_id, only: [:show, :edit, :update, :destroy]
-  # skip_before_action :authenticate_user!, only: :index
+   before_action :find_id, only: [:show, :edit, :update, :destroy]
+   skip_before_action :authenticate_user!, only: :index, :new
   def index
     @assets = Asset.all
   end
