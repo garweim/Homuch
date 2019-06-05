@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new(session.to_hash.symbolize_keys.slice(*session_saved_keys)) #Prefill based on session info
+    @project = Project.new(session_projects_params) #Prefill based on session info
     # authorize @Projects
   end
 
@@ -17,9 +17,9 @@ class ProjectsController < ApplicationController
       # METHOD that redirects to COMPLEX estimation
     else
       save_project_data_in_session
-      # Method that redirects to SIMPLE estimation
+      perform_simple_estimate
+      render 'projects/simple_estimate'
     end
-    redirect_to root_path
   end
 
   def create_project
@@ -55,13 +55,17 @@ class ProjectsController < ApplicationController
               :zipcode, :name, :state)
   end
 
+  def session_projects_params
+    session.to_hash.symbolize_keys.slice(*session_saved_keys)
+  end
+
   def session_saved_keys
     [ :zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
   end
 
-  # def perform_analysis
-  #   @roi = MyObject.new.call(project)
-  # end
+   def perform_simple_estimate
+    @simple_estimate = ::Calculation.new.market_price(session_projects_params)
+   end
 
   # def authorize_offering
   #   authorize @offering

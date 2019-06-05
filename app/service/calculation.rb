@@ -1,10 +1,11 @@
 class Calculation
-  def market_price(zipcode, sqm, bed, bath)
-    filtered_array = SellMarket.where(zipcode: zipcode, surface: sqm-20 ..sqm+20, nr_of_bedrooms: bed, nr_of_bathrooms: bath)
+  def market_price(params)
+    filtered_array = SellMarket.where(zipcode: params[:zipcode], surface: surface_range(params), nr_of_bedrooms: params[:nr_of_bedrooms], nr_of_bathrooms: params[:nr_of_bathrooms])
 
+    return unless filtered_array.present?
     price_per_sqm = []
     filtered_array.each do |x|
-      price_per_sqm << x.price/x.surface
+      price_per_sqm << x.price / x.surface
     end
 
     sum = 0
@@ -12,7 +13,12 @@ class Calculation
       sum += x
     end
 
-    sum/filtered_array.count
+    sum / filtered_array.count
+  end
+
+  def surface_range(params)
+    surface = params[:surface].to_i
+    surface-20 ..surface+20
   end
 end
 
