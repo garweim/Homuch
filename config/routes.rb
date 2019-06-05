@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources 'projects' do
-    resources 'estimates'
+  resources 'estimates'
   end
   devise_for :users
   root to: 'pages#home'
