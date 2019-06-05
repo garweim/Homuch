@@ -1,11 +1,11 @@
-class CreateAssets < ActiveRecord::Migration[5.2]
+class CreateProjects < ActiveRecord::Migration[5.2]
   def change
-    create_table :assets do |t|
+    create_table :projects do |t|
       t.string :name
       t.string :address
       t.integer :surface
       t.integer :nr_of_bedrooms
-      t.string :type_asset
+      t.string :category
       t.integer :nr_of_bathrooms
       t.string :state
       t.integer :garage
