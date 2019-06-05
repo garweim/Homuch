@@ -1,21 +1,30 @@
 <div class='container-offer-performance'>
   <div class="container">
     <h3 id="sign-upp">Estimate your asset</h3>
-
-    <%= simple_form_for(@project) do |f| %>
-      <div class="form-card">
-        <div class="form-inputs">
-          <%= f.input :street_and_nr %>
-          <%= f.input :surface %>
-          <%= f.input :nr_of_bedrooms %>
-          <%= f.input :nr_of_bathrooms %>
-          <%= f.input :category %>
-        </div>
-
-        <div class="form-actions">
-           <%= f.submit "Estimate", class: "btn-red" %>
-        </div>
+      <%= simple_form_for(@project) do |f| %>
+        <div class="form-card">
+          <div class="form-inputs">
+            <%= f.input :zipcode %>
+            <%= f.input :surface %>
+            <%= f.input :nr_of_bedrooms %>
+            <%= f.input :nr_of_bathrooms %>
+            <%= f.input :category %>
+            <% if current_user %>
+              <%= f.input :name %>
+              <%= f.input :street_and_nr %>
+              <%= f.input :state %>
+              <%= f.input :garage %>
+              <%= f.input :heating%>
+              <%= f.input :electricity %>
+              <%= f.input :kitchen %>
+              <%= f.input :sanitation %>
+            <% end  %>
+          </div>
+          <div class="form-actions">
+             <%= f.submit "Detailed Estimate", class: "btn-red" %>
+          </div>
+        <% end  %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>
