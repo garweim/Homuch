@@ -12,6 +12,15 @@ class Scraper
 
   private
 
+
+ url =  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment,ground-floor,penthouse,duplex,triplex,flat---studio,loft&regions=brussels-region&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
+  # def url
+  # #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&regions=brussels-region&minPrice=#{min_price}&maxPrice=#{max_price}&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
+  # #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&regions=brussels-region&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
+  # #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&towns=1000-brussels&propertysubtypes=flat---apartment&bedrooms=2&bathrooms=2&minTotalSurface=100&maxTotalSurface=400&noindex=1"
+  #  # "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&towns=#{zipcode}-brussels&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
+  # end
+
   def get_html_doc
     html_file = open(url)
     @html_doc = Nokogiri::HTML(html_file)
@@ -32,12 +41,7 @@ class Scraper
   def parse_projects_data
   end
 
-  def url
-  #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment,ground-floor,penthouse,duplex,triplex,flat---studio,loft&regions=brussels-region&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
-  #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&regions=brussels-region&minPrice=#{min_price}&maxPrice=#{max_price}&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
-  #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&regions=brussels-region&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
-    "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&towns=#{zipcode}-brussels&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
-  end
+
 
   def min_surface
     project.surface - 10
@@ -65,7 +69,7 @@ class Scraper
   end
 
   def get_bedrooms
-    app.search(" ").text.strip
+    app.search(title: "Bedroom(s)" ).text.strip
 
 
   end
@@ -83,7 +87,7 @@ class Scraper
   end
 
   def get_zipcode
-
+    app.search(itemprop: "postalCode").text.strip
   end
 end
 

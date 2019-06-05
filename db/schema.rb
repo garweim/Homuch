@@ -15,32 +15,12 @@ ActiveRecord::Schema.define(version: 2019_06_05_101041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "estimates", force: :cascade do |t|
-    t.integer "market_price"
-    t.integer "rental_price"
-    t.integer "roi_rate"
-    t.integer "roi_price"
-    t.integer "loan_payment"
-    t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_estimates_on_project_id"
-  end
-
-  create_table "pictures", force: :cascade do |t|
-    t.string "data"
-    t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_pictures_on_project_id"
-  end
-
-  create_table "projects", force: :cascade do |t|
+  create_table "assets", force: :cascade do |t|
     t.string "name"
     t.string "street_and_nr"
     t.integer "surface"
     t.integer "nr_of_bedrooms"
-    t.string "category"
+    t.string "type_asset"
     t.integer "nr_of_bathrooms"
     t.string "state"
     t.integer "garage"
@@ -53,17 +33,37 @@ ActiveRecord::Schema.define(version: 2019_06_05_101041) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "zipcode"
-    t.index ["user_id"], name: "index_projects_on_user_id"
+    t.index ["user_id"], name: "index_assets_on_user_id"
+  end
+
+  create_table "estimates", force: :cascade do |t|
+    t.integer "market_price"
+    t.integer "rental_price"
+    t.integer "roi_rate"
+    t.integer "roi_price"
+    t.integer "loan_payment"
+    t.bigint "asset_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_estimates_on_asset_id"
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "data"
+    t.bigint "asset_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_pictures_on_asset_id"
   end
 
   create_table "renovations", force: :cascade do |t|
     t.string "type"
     t.integer "price_per_unit"
     t.integer "quantity"
-    t.bigint "project_id"
+    t.bigint "asset_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_renovations_on_project_id"
+    t.index ["asset_id"], name: "index_renovations_on_asset_id"
   end
 
   create_table "rental_markets", force: :cascade do |t|
@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 2019_06_05_101041) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "estimates", "projects"
-  add_foreign_key "pictures", "projects"
-  add_foreign_key "projects", "users"
-  add_foreign_key "renovations", "projects"
+  add_foreign_key "assets", "users"
+  add_foreign_key "estimates", "assets"
+  add_foreign_key "pictures", "assets"
+  add_foreign_key "renovations", "assets"
 end
