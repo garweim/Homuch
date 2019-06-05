@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
-   before_action :find_id, only: [:show, :edit, :update, :destroy]
-   skip_before_action :authenticate_user!, only: [:index, :new, :create]
+  before_action :find_id, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
     @projects = Project.all
@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
       save_project_data_in_session
       # Method that redirects to SIMPLE estimation
     end
-    redirect_to new_project_path
+    redirect_to root_path
   end
 
   def create_project
@@ -48,11 +48,15 @@ class ProjectsController < ApplicationController
   private
 
   def projects_params
-    params.require(:project).permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category)
+    params
+      .require(:project)
+      .permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms,
+              :category, :garage, :heating, :electricity, :kitchen, :sanitation,
+              :zipcode, :name, :state)
   end
 
   def session_saved_keys
-    [:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
+    [ :zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
   end
 
   # def perform_analysis
