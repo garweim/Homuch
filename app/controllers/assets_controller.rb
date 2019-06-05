@@ -51,7 +51,7 @@ class AssetsController < ApplicationController
   end
 
   def session_saved_keys
-    [ :address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset ]
+    [:address, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :type_asset]
   end
 
   # def perform_analysis
