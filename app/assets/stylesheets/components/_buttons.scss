@@ -1,15 +1,36 @@
-.btn-green {
-    padding: 0.3rem 2rem;
+.btn-white {
+    padding: 0.6rem 2rem;
     font-size: 15px;
+    font-weight: bold;
     background-color: white;
-    border-radius: 50px;
-    color: #095228;
+    border-radius: 5px;
+    color: #191716;
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.btn-white:hover {
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #191716;
+    opacity: 1;
+}
+
+.btn-green {
+    padding: 0.6rem 2rem;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #29554E;
+    border-radius: 5px;
+    color: white;
     text-decoration: none;
 }
 
 .btn-green:hover {
     font-size: 15px;
     font-weight: bold;
+    background-color: #14453D;
     text-decoration: none;
-    color: #095228;
+    color: white;
 }

@@ -18,6 +18,8 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     # authorize @Projects
+    session_projects_params
+    perform_simple_estimate
   end
 
   def create
