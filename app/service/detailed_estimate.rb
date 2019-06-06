@@ -1,17 +1,29 @@
 class DetailedEstimate
-  def call_detailed(params)
+  def call(params)
     @params = params
-    total_price
+    return unless market_price
+    total_estimate
   end
 
   private
+
   attr_reader :params
 
   def total_estimate
-    electricity_price + heating_price + sanitation_price + kitchen_price
+    market_price + registration_fees + total_price
   end
 
   def registration_fees
     market_price * 1.15
   end
+
+  def market_price
+    @market_price ||= SimpleEstimate.new.market_price(params)
+    # SimpleEstimate.new.market_price(params)
+  end
+
+  def total_price
+    @total_price ||= RenovationCalculator.new.call(params)
+  end
 end
+# DetailedEstimate.new.call_detailed(Project.last)

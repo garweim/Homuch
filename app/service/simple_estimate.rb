@@ -11,7 +11,7 @@ class SimpleEstimate
     price_per_sqm.each do |x|
       sum += x
       end
-    sum / filtered_array.count
+    sum / filtered_array.count * params[:surface].to_i
   end
 
   def surface_range(params)
