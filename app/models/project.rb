@@ -9,4 +9,7 @@ class Project < ApplicationRecord
             presence: true
   validates :state, inclusion: { in: STATE }
   validates :heating, :electricity, :kitchen, :sanitation, inclusion: { in: [true, false] }
+
+  geocoded_by :street_and_nr
+  after_validation :geocode, if: :will_save_change_to_street_and_nr?
 end
