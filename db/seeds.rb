@@ -32,8 +32,6 @@ Estimate.create(market_price:500, rental_price:2, roi_rate:0.03, roi_price:450, 
 Estimate.create(market_price:450, rental_price:3, roi_rate:0.03, roi_price:400, loan_payment:40, project_id: Project.all.sample.id)
 Estimate.create(market_price:520, rental_price:2, roi_rate:0.03, roi_price:460, loan_payment:46, project_id: Project.all.sample.id)
 
-puts "done"
-
 SellMarket.destroy_all
 puts "appartments in the market that are sold..."
 SellMarket.create(zipcode: 1000, surface:200, nr_of_bedrooms:2, nr_of_bathrooms:1, price:400000)

@@ -16,19 +16,38 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new(session.to_hash.symbolize_keys.slice(*session_saved_keys)) #Prefill based on session info
+    @project = Project.new(session_projects_params) #Prefill based on session info
     # authorize @Projects
   end
 
   def create
     if current_user
       create_project
-      # METHOD that redirects to COMPLEX estimation
+      perform_detailed_estimate
+      render 'projects/detailed_estimate'
     else
       save_project_data_in_session
-      # Method that redirects to SIMPLE estimation
+      perform_simple_estimate
+      render 'projects/simple_estimate'
     end
-    redirect_to root_path
+  end
+
+  private
+
+  def projects_params
+    params
+      .require(:project)
+      .permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms,
+              :category, :garage, :heating, :electricity, :kitchen, :sanitation,
+              :zipcode, :name, :state)
+  end
+
+  def session_projects_params
+    session.to_hash.symbolize_keys.slice(*session_saved_keys)
+  end
+
+  def session_saved_keys
+    [ :zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
   end
 
   def create_project
@@ -42,42 +61,11 @@ class ProjectsController < ApplicationController
     @project = OpenStruct.new(projects_params)
   end
 
-  def show
+  def perform_simple_estimate
+    @simple_estimate = ::SimpleEstimate.new.market_price(session_projects_params)
   end
 
-  def edit
+  def perform_detailed_estimate
+    @detailed_estimate = ::DetailedEstimate.new.call(projects_params)
   end
-
-  def update
-  end
-
-  def destroy
-  end
-
-  private
-
-  def projects_params
-    params
-      .require(:project)
-      .permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms,
-              :category, :garage, :heating, :electricity, :kitchen, :sanitation,
-              :zipcode, :name, :state)
-  end
-
-  def session_saved_keys
-    [ :zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
-  end
-
-  # def perform_analysis
-  #   @roi = MyObject.new.call(project)
-  # end
-
-  # def authorize_offering
-  #   authorize @offering
-  # end
-
-  # def find_id
-  #   @offering = Offering.find(params[:id])
-  #   authorize @offering
-  # end
 end
