@@ -14,35 +14,13 @@ class ProjectsController < ApplicationController
   def create
     if current_user
       create_project
-      # METHOD that redirects to COMPLEX estimation
+      perform_detailed_estimate
+      render 'projects/detailed_estimate'
     else
       save_project_data_in_session
       perform_simple_estimate
       render 'projects/simple_estimate'
     end
-  end
-
-  def create_project
-    @project = Project.create(projects_params.merge(user: current_user))
-  end
-
-  def save_project_data_in_session
-    projects_params.each do |key, val|
-      session[key] = val
-    end
-    @project = OpenStruct.new(projects_params)
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
   end
 
   private
@@ -63,16 +41,22 @@ class ProjectsController < ApplicationController
     [ :zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
   end
 
-   def perform_simple_estimate
-    @simple_estimate = ::Calculation.new.market_price(session_projects_params)
-   end
+  def create_project
+    @project = Project.create(projects_params.merge(user: current_user))
+  end
 
-  # def authorize_offering
-  #   authorize @offering
-  # end
+  def save_project_data_in_session
+    projects_params.each do |key, val|
+      session[key] = val
+    end
+    @project = OpenStruct.new(projects_params)
+  end
 
-  # def find_id
-  #   @offering = Offering.find(params[:id])
-  #   authorize @offering
-  # end
+  def perform_simple_estimate
+    @simple_estimate = ::SimpleEstimate.new.market_price(session_projects_params)
+  end
+
+  def perform_detailed_estimate
+    @detailed_estimate = ::DetailedEstimate.new.call(projects_params)
+  end
 end
