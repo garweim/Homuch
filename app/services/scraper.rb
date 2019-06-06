@@ -1,98 +1,123 @@
-require 'open-uri'
+# require 'open-uri'
 require 'nokogiri'
 
 class Scraper
   attr_reader :project, :html_doc
 
-  def call(project)
-    @project = project
-    get_html_doc
-    #get_all_projects
+  def call(zipcode)
+    @zipcode = zipcode
+    @url = "https://www.logic-immo.be/en/buy/apartments-for-sale/-#{@zipcode}.html"
+    @html_doc = Nokogiri::HTML(HTTParty.get(@url).body)
+    scrape_houses
     #parse_projects_data
   end
 
   private
 
-
   # def url
-  # #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&regions=brussels-region&minPrice=#{min_price}&maxPrice=#{max_price}&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
-  # #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&regions=brussels-region&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
-  # #  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&towns=1000-brussels&propertysubtypes=flat---apartment&bedrooms=2&bathrooms=2&minTotalSurface=100&maxTotalSurface=400&noindex=1"
-  #  # "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&towns=#{zipcode}-brussels&propertysubtypes=flat---apartment&bedrooms=#{bedrooms}&bathrooms=#{bathrooms}&minTotalSurface=#{min_surface}&maxTotalSurface=#{max_surface}&noindex=1"
+  # "https://www.immoweb.be/en/search/apartment/for-sale/brussels/#{zipcode}?minroom=#{min_bedrooms}&maxroom=#{max_bedrooms}"
+  # "https://www.logic-immo.be/en/buy/house-for-sale/brussels-#{zipcode}.html"
   # end
 
-  def get_html_doc
-    #url =  "https://immo.vlan.be/en/real-estate/flat?transactiontypes=for-sale,in-public-sale&propertysubtypes=flat---apartment&bedrooms=1&bathrooms=1&minTotalSurface=100&maxTotalSurface=200&noindex=1"
-    url = "https://www.w3schools.com/css/css_attribute_selectors.asp"
-    html_file = open(url)
-    @html_doc = Nokogiri::HTML(html_file)
-  end
+  # def get_html_doc
+  #   html_file = open(url)
+  #   @html_doc = Nokogiri::HTML(html_file)
+  # end
 
-  def get_all_projects
-    html_doc.search('.card').map do |app|
-      {
-        zipcode: get_zipcode,
-        surface: get_surface,
-        nr_of_bedrooms: get_bedrooms,
-        nr_of_bathrooms: get_bathrooms,
-        price: get_price
+  def scrape_houses
+    @html_doc.search('div.list-group-item div.property-description').each do |house|
+      # p house
+      house_link = house.search("a").first.attribute("href").value
+      p house_link
+      url = "https://www.logic-immo.be#{house_link}"
+      p url
+      house_doc = Nokogiri::HTML(HTTParty.get(url).body)
+      house_details = house_doc.search("#property-details-icons")
+      attributes = {
+        zipcode: @zipcode,
+        surface: get_surface(house_details),
+        nr_of_bedrooms: get_bedrooms(house_details),
+        nr_of_bathrooms: get_bathrooms(house_details),
+        price: get_price(house_doc)
       }
+      p attributes
     end
   end
 
-  def parse_projects_data
+  def get_surface(house_details)
+    surface = house_details.search(".area p")[0]
+    return surface.text.strip.gsub(/[^\d]/, '').to_i if surface
+
+    nil
   end
 
+  def get_bedrooms(house_details)
+    bedrooms = house_details.search(".nb_bedrooms p")[0]
+    return bedrooms.text.strip.gsub(/[^\d]/, '').to_i if bedrooms
 
-
-  def min_surface
-    project.surface - 10
+    nil
   end
 
-  def max_surface
-    project.surface + 10
+  def get_bathrooms(house_details)
+    bathrooms = house_details.search(".nb_bath p")[0]
+    return bathrooms.text.strip.gsub(/[^\d]/, '').to_i if bathrooms
+
+    nil
   end
 
-  def bedrooms
-    project.nr_of_bedrooms
+  def get_price(house_doc)
+    price = house_doc.search(".c-details_title > span")[0]
+    return price.text.strip.gsub(/[^\d]/, '').to_i if price
+
+    nil
   end
 
-  def bathrooms
-    project.nr_of_bathrooms
-  end
-
-  def zipcode
-    project.zipcode
-  end
-
-  def get_surface
-    app.search(" ").text.strip
-
-  end
-
-  def get_bedrooms
-    app.search(title: "Bedroom(s)" ).text.strip
+  # def parse_projects_data
+  # end
 
 
-  end
 
+  # def min_surface
+  #   if project.surface
+  #     project.surface - 10
+  #   else
+  #     100
+  #   end
+  # end
 
-  def get_bathrooms
-    app.search(" ").text.strip
+  # def max_surface
+  #   if project.surface.present?
+  #     project.surface + 10
+  #   else
+  #     150
+  #   end
+  # end
 
+  # def min_bedrooms
+  #   if project.nr_of_bedrooms.present? && project.nr_of_bedrooms > 1
+  #     project.nr_of_bedrooms - 1
+  #   else
+  #     1
+  #   end
+  # end
 
-  end
+  # def max_bedrooms
+  #   if project.nr_of_bedrooms.present?
+  #     project.nr_of_bedrooms + 1
+  #   else
+  #     1
+  #   end
+  # end
 
+  # def bathrooms
+  #   if project.nr_of_bathrooms.present?
+  #     project.nr_of_bathrooms
+  #   else
+  #     1
+  #   end
+  # end
 
-  def get_price
-    app.search(".list-item-price").text.strip
-  end
-
-  def get_zipcode
-    app.search(itemprop: "postalCode").text.strip
-  end
 end
-
 ### SCRAPING INFO ###
 
 # An appartement card has:
