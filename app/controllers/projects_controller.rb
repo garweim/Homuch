@@ -57,6 +57,6 @@ class ProjectsController < ApplicationController
   end
 
   def perform_detailed_estimate
-    # TODO
+    @detailed_estimate = ::DetailedEstimate.new.call(projects_params)
   end
 end
