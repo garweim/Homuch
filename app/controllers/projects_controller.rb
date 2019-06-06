@@ -3,12 +3,23 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-    @projects = Project.all
+    #@projects = Project.all
+
+    @projects = Project.where.not(latitude: nil, longitude: nil)
+
+    @markers = @projects.map do |project|
+      {
+        lat: project.latitude,
+        lng: project.longitude
+      }
+    end
   end
 
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     # authorize @Projects
+    session_projects_params
+    perform_simple_estimate
   end
 
   def create
