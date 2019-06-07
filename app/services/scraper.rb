@@ -41,7 +41,7 @@ class Scraper
         price: get_price(house_doc)
       }
       p attributes
-      SellMarket.create!(attributes)
+      SellMarket.find_or_create_by(attributes)
     end
   end
 
