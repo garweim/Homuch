@@ -26,14 +26,13 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
-    session_projects_params
-    perform_simple_estimate
+    # session_projects_params
+    # perform_simple_estimate
   end
 
   def create
     if current_user
       create_project
-      perform_detailed_estimate
       redirect_to project_path(@project) if @project.errors.none?
     else
       save_project_data_in_session
@@ -44,6 +43,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    perform_detailed_estimate
     # @estimate = Estimate.new
   end
 
@@ -89,6 +89,6 @@ class ProjectsController < ApplicationController
   end
 
   def perform_detailed_estimate
-    @detailed_estimate = ::DetailedEstimate.new.call(projects_params)
+    @detailed_estimate = ::DetailedEstimate.new.call(@project)
   end
 end
