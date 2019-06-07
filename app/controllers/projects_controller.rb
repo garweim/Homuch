@@ -4,15 +4,24 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    @projects = Project.where.not(latitude: nil, longitude: nil)
+    @markers = @projects.map do |project|
+      {
+        lat: project.latitude,
+        lng: project.longitude
+      }
+    end
+  end
 
-    # @projects = Project.where.not(latitude: nil, longitude: nil)
+  def show
+    @project = Project.find(params[:id])
 
-    # @markers = @projects.map do |project|
-    #   {
-    #     lat: project.latitude,
-    #     lng: project.longitude
-    #   }
-    # end
+    @markers = [
+      {
+        lat: @project.latitude,
+        lng: @project.longitude
+      }
+    ]
   end
 
   def new
@@ -25,7 +34,7 @@ class ProjectsController < ApplicationController
     if current_user
       create_project
       perform_detailed_estimate
-      render 'projects/detailed_estimate'
+      redirect_to project_path(@project) if @project.errors.none?
     else
       save_project_data_in_session
       perform_simple_estimate
