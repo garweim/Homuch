@@ -43,12 +43,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show
-    @project = Project.find(params[:id])
-    perform_detailed_estimate
-    # @estimate = Estimate.new
-  end
-
   def update
     @project.update(projects_params)
   end
