@@ -10,11 +10,11 @@
             <%= f.input :surface %>
             <%= f.input :nr_of_bedrooms %>
             <%= f.input :nr_of_bathrooms %>
-            <%= f.input :category %>
+            <%= f.input :category, collection: ["apartment", "house"] %>
             <% if current_user %>
               <%= f.input :name %>
               <%= f.input :street_and_nr %>
-              <%= f.input :state %>
+              <%= f.input :state, collection: Project::STATE %>
               <%= f.input :garage %>
               <%= f.input :heating%>
               <%= f.input :electricity %>
