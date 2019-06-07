@@ -1,0 +1,2 @@
+namespace :scraper do
+end
