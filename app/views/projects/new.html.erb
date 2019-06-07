@@ -23,6 +23,8 @@
             <% end  %>
           </div>
 
+          <%= f.button :submit, class: "btn-green" %>
+
           <button type="button" class="btn-green" data-toggle="modal" data-target="#exampleModal">
            Start estimate !
           </button>
@@ -63,7 +65,7 @@
             <p style="color:#095228"><strong>Your estimate:</strong></p>
           </div>
           <div class="result-estimate">
-            <h4><%= @simple_estimate*session[:surface].to_i %>€</h4>
+            <h4><%= @simple_estimate %>€</h4>
           </div>
           <div class="container-estimate-text">
             <br>
