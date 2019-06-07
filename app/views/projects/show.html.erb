@@ -1,6 +1,54 @@
+<br>
+<br>
+<br>
 <div><h1>Project</h1></div>
-<div><p>We show you one estimate</p></div>
-<%= @project.name  %>
+<div class="content">
+   <div class= "content-center">
+   <div class="container-estimate-text">
+            <p style="color:#095228"><strong>Your estimate:</strong></p>
+          </div>
+     <!--  <div class="header"> -->
+         <div class="result-estimate">
+            <h4><%= @detailed_estimate %>€</h4>
+          </div>
+        <!-- <h3 class="title title-center" id="estimate">Your estimate</h3> -->
+      <!-- </div> -->
+      </div>
+      <div class="body">
+        <div class="category-card">
+          <div class="card-search_search">
+            <h5>Details of your search</h5>
+            <p><strong>Type of asset:</strong> <%= session[:category]%></p>
+            <p><strong>Address:</strong> <%= session[:zipcode]%></p>
+            <p><strong>Surface:</strong> <%= session[:surface]%> sqm</p>
+            <p><strong>Nr. of bedrooms:</strong> <%= session[:nr_of_bedrooms] %></p>
+            <p><strong>Nr. of bathrooms:</strong> <%= session[:nr_of_bathrooms]%></p>
+            <p><strong>state of asset:</strong> <%= @project.state%></p>
+            <p><strong>garage:</strong> <%= @project.garage%></p>
+            <h4>Renovations to be done</h4>
+            <p><strong><%= 'Heating' if @project.heating %></strong> </p>
+            <p><strong><%= 'Kitchen' if @project.kitchen %></strong> </p>
+            <p><strong><%= 'sanitation' if @project.sanitation %></strong> </p>
+            <p><strong><%= 'electricity' if @project.electricity %></strong> </p>
+          </div>
+          <br>
+
+
+
+
+          <%# if session[:surface]  %>
+          <%# end %>
+
+          <div class="container-estimate-text">
+            <br>
+            <p style="color:#095228" ><strong>Want a more detailed estimate?</strong></p>
+            <p>Please <strong><%#= link_to "create an account",  new_user_registration_path %></strong> or <strong><%#= link_to "log in", new_user_session_path %></strong> to proceed to the detailed estimate and enjoy multiple additionnal features.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div
   id="map"
   style="width: 40%;
