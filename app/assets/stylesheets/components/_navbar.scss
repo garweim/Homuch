@@ -11,3 +11,13 @@
   padding-bottom: 1rem;
   width: 11rem;
 }
+
+.fixed-top {
+  height: 80px;
+}
+
+.contain-items {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
