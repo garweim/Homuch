@@ -3,8 +3,10 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-    @projects = Project.all
+
+    #@projects = Project.all
     @projects = Project.where.not(latitude: nil, longitude: nil)
+
     @markers = @projects.map do |project|
       {
         lat: project.latitude,
