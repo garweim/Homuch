@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
+
     #@projects = Project.all
     @projects = Project.where.not(latitude: nil, longitude: nil)
 
@@ -27,6 +28,8 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
+    session_projects_params
+    perform_simple_estimate
   end
 
   def create
@@ -39,6 +42,19 @@ class ProjectsController < ApplicationController
       perform_simple_estimate
       render 'projects/simple_estimate'
     end
+  end
+
+  def show
+    @project = Project.find(params[:id])
+    # @estimate = Estimate.new
+  end
+
+  def update
+    @project.update(projects_params)
+  end
+
+  def destroy
+    @project.destroy
   end
 
   private
@@ -56,7 +72,7 @@ class ProjectsController < ApplicationController
   end
 
   def session_saved_keys
-    [ :zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
+    [:zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
   end
 
   def create_project
