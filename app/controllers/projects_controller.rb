@@ -1,32 +1,31 @@
 class ProjectsController < ApplicationController
-  before_action :find_id, only: [:show, :edit, :update, :destroy]
+  # before_action :find_id, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-    #@projects = Project.all
+    @projects = Project.all
+  end
 
-    @projects = Project.where.not(latitude: nil, longitude: nil)
+  def show
+    @project = Project.find(params[:id])
 
-    @markers = @projects.map do |project|
+    @markers = [
       {
-        lat: project.latitude,
-        lng: project.longitude
+        lat: @project.latitude,
+        lng: @project.longitude
       }
-    end
+    ]
   end
 
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
-    # authorize @Projects
-    session_projects_params
-    perform_simple_estimate
   end
 
   def create
     if current_user
       create_project
       perform_detailed_estimate
-      render 'projects/detailed_estimate'
+      redirect_to project_path(@project) if @project.errors.none?
     else
       save_project_data_in_session
       perform_simple_estimate
