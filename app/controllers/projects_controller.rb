@@ -3,7 +3,16 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-    @projects = Project.all
+
+    #@projects = Project.all
+    @projects = Project.where.not(latitude: nil, longitude: nil)
+
+    @markers = @projects.map do |project|
+      {
+        lat: project.latitude,
+        lng: project.longitude
+      }
+    end
   end
 
   def show
@@ -19,18 +28,33 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
+    # session_projects_params
+    # perform_simple_estimate
   end
 
   def create
     if current_user
       create_project
-      perform_detailed_estimate
       redirect_to project_path(@project) if @project.errors.none?
     else
       save_project_data_in_session
       perform_simple_estimate
       render 'projects/simple_estimate'
     end
+  end
+
+  def show
+    @project = Project.find(params[:id])
+    perform_detailed_estimate
+    # @estimate = Estimate.new
+  end
+
+  def update
+    @project.update(projects_params)
+  end
+
+  def destroy
+    @project.destroy
   end
 
   private
@@ -48,7 +72,7 @@ class ProjectsController < ApplicationController
   end
 
   def session_saved_keys
-    [ :zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
+    [:zipcode, :surface, :nr_of_bedrooms, :nr_of_bathrooms, :category]
   end
 
   def create_project
@@ -67,6 +91,6 @@ class ProjectsController < ApplicationController
   end
 
   def perform_detailed_estimate
-    @detailed_estimate = ::DetailedEstimate.new.call(projects_params)
+    @detailed_estimate = ::DetailedEstimate.new.call(@project)
   end
 end
