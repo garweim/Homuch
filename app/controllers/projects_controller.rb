@@ -1,9 +1,8 @@
 class ProjectsController < ApplicationController
-  # before_action :find_id, only: [:show, :edit, :update, :destroy]
+  before_action :find_id, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-
     #@projects = Project.all
     @projects = Project.where.not(latitude: nil, longitude: nil)
 
@@ -15,21 +14,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show
-    @project = Project.find(params[:id])
-
-    @markers = [
-      {
-        lat: @project.latitude,
-        lng: @project.longitude
-      }
-    ]
-  end
-
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
-    # session_projects_params
-    # perform_simple_estimate
+    perform_simple_estimate
   end
 
   def create
@@ -44,27 +31,35 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    find_id
+    @markers = [
+      {
+        lat: @project.latitude,
+        lng: @project.longitude
+      }
+    ]
     perform_detailed_estimate
-    # @estimate = Estimate.new
   end
 
-  def update
-    @project.update(projects_params)
-  end
+  # def update
+  #   @project.update(projects_params)
+  # end
 
-  def destroy
-    @project.destroy
-  end
+  # def destroy
+  #   @project.destroy
+  # end
 
   private
 
   def projects_params
-    params
-      .require(:project)
+    params.require(:project)
       .permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms,
               :category, :garage, :heating, :electricity, :kitchen, :sanitation,
               :zipcode, :name, :state)
+  end
+
+  def find_id
+    @project = Project.find(params[:id])
   end
 
   def session_projects_params
@@ -91,9 +86,7 @@ class ProjectsController < ApplicationController
   end
 
   def perform_detailed_estimate
-
-    @detailed_estimate = ::DetailedEstimate.new.call(create_project)
     @detailed_estimate = ::DetailedEstimate.new.call(@project)
-
+    # @detailed_estimate = ::DetailedEstimate.new.call(@project)
   end
 end
