@@ -33,6 +33,10 @@ class ProjectsController < ApplicationController
   # def update
   #   @project.update(projects_params)
   # end
+  def update
+    @project.update(projects_params)
+  end
+
 
   # def destroy
   #   @project.destroy

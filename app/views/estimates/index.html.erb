@@ -2,5 +2,10 @@
 <p>An asset can have different estimates</p>
 
 <% @estimates.each do |estimate| %>
-  <h2><%= estimate.market_price %></h2>
+  <ul>
+   <li>
+    <h2><%= estimate.market_price %></h2>
+   </li>
+ </ul>
 <% end %>
+
