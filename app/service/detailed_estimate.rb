@@ -1,7 +1,8 @@
 class DetailedEstimate
   def call(params)
     @params = params
-    return unless market_price
+    return unless market_price_estimate
+
     total_estimate
   end
 
@@ -10,14 +11,14 @@ class DetailedEstimate
   attr_reader :params
 
   def total_estimate
-    market_price + registration_fees + total_price
+    market_price_estimate + registration_fees + total_price
   end
 
   def registration_fees
-    market_price * 1.15
+    market_price_estimate * 1.15
   end
 
-  def market_price
+  def market_price_estimate
     @market_price ||= SimpleEstimate.new.market_price(params)
     # SimpleEstimate.new.market_price(params)
   end
