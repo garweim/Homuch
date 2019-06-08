@@ -5,13 +5,7 @@ class ProjectsController < ApplicationController
   def index
     #@projects = Project.all
     @projects = Project.where.not(latitude: nil, longitude: nil)
-
-    @markers = @projects.map do |project|
-      {
-        lat: project.latitude,
-        lng: project.longitude
-      }
-    end
+    map_all_projects
   end
 
   def new
@@ -32,13 +26,8 @@ class ProjectsController < ApplicationController
 
   def show
     find_id
-    @markers = [
-      {
-        lat: @project.latitude,
-        lng: @project.longitude
-      }
-    ]
     perform_detailed_estimate
+    map_single_project
   end
 
   # def update
@@ -88,5 +77,23 @@ class ProjectsController < ApplicationController
   def perform_detailed_estimate
     @detailed_estimate = ::DetailedEstimate.new.call(@project)
     # @detailed_estimate = ::DetailedEstimate.new.call(@project)
+  end
+
+  def map_single_project
+    @markers = [
+      {
+        lat: @project.latitude,
+        lng: @project.longitude
+      }
+    ]
+  end
+
+  def map_all_projects
+    @markers = @projects.map do |project|
+      {
+        lat: project.latitude,
+        lng: project.longitude
+      }
+    end
   end
 end
