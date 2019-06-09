@@ -6,6 +6,7 @@
       <%= simple_form_for(@project) do |f| %>
         <div class="form-card">
           <div class="form-inputs">
+            <div>
             <%= f.input :zipcode, as: :string %>
             <%= f.input :surface %>
             <%= f.input :nr_of_bedrooms %>
@@ -20,6 +21,16 @@
               <%= f.input :electricity %>
               <%= f.input :kitchen %>
               <%= f.input :sanitation %>
+            </div>
+            <div>
+              <%= f.fields_for :pictures do |p| %>
+                <div>
+                  <%= p.label :picture %><br>
+                  <%= p.file_field :picture, :multiple => true, name:     "pictures[:photo][]" %>
+                </div>
+              <% end %>
+            </div>
+
             <% end  %>
           </div>
           <%= f.submit :submit, class: "btn-green" %>

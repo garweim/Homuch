@@ -24,18 +24,21 @@ class ProjectsController < ApplicationController
         lng: @project.longitude
       }
     ]
+    @pictures = @project.pictures.all
   end
 
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     # session_projects_params
     # perform_simple_estimate
+    @picture = @project.pictures.build
   end
 
   def create
+    raise
     if current_user
       create_project
-      redirect_to project_path(@project) if @project.errors.none?
+      redirect_to project_path(@project), notice: 'Project was successfully created.' if @project.errors.none?
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -58,7 +61,7 @@ class ProjectsController < ApplicationController
       .require(:project)
       .permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms,
               :category, :garage, :heating, :electricity, :kitchen, :sanitation,
-              :zipcode, :name, :state)
+              :zipcode, :name, :state, pictures_attributes: [:id, :project_id, :photo])
   end
 
   def session_projects_params
@@ -71,6 +74,11 @@ class ProjectsController < ApplicationController
 
   def create_project
     @project = Project.create(projects_params.merge(user: current_user))
+    if @project.save
+      params[:project]['photo'].each do |a|
+      @picture = @project.picture.create!(:photo => a, :project_id => @project.id)
+       end
+    end
   end
 
   def save_project_data_in_session
