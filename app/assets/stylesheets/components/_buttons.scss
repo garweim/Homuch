@@ -34,3 +34,27 @@
     text-decoration: none;
     color: white;
 }
+
+#edit-btn {
+  position: absolute !important;
+  top: 1.3rem;
+  right: 1rem;
+  font-size: 13px;
+  color: #878787;
+}
+
+#edit-btn:hover {
+  color: black;
+}
+
+#delete-btn {
+  position: absolute !important;
+  top: 1.3rem;
+  right: 2.5rem;
+  font-size: 13px;
+  color: #878787;
+}
+
+#delete-btn:hover {
+  color: black;
+}
