@@ -4,16 +4,37 @@
   margin: 0 auto;
   text-align: center;
 }
+
+// .container-landing h3 {
+//   margin: 2rem 0rem 0.5rem 0rem;
+// }
+
+.container-steps-all {
+  margin: 3rem 0rem 5rem 0rem;
+}
+
 .container-steps {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
   justify-content: space-around;
   margin-top: 1rem;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 2.5rem 2.5rem;
 }
 
 .container-step {
+  margin: 0 auto;
+  width: 70%;
   color: #095228;
+  font-size: 10px;
+}
+
+.container-step img {
+  height: 4rem;
+  margin-bottom: 1rem;
 }
 
 .step-text {
@@ -21,6 +42,8 @@
   margin-top: 1rem;
   text-align: center;
   margin: 0 auto;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .step-text p {
@@ -34,4 +57,46 @@
 .container-form {
   width: 45%;
   margin: 0 auto;
+}
+
+.container-avantages {
+  width: 100%;
+  margin-top: 5rem;
+}
+
+.container-avantage-text-right {
+  text-align: right;
+  margin-top: 3rem;
+}
+
+.container-avantage-text-left {
+  text-align: left;
+  margin-top: 3rem;
+}
+
+.container-avantage {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 4rem 0rem;
+}
+
+.container-avantage-img-left {
+  width: 60rem;
+  height: 15rem;
+  background-image: url(https://images.unsplash.com/photo-1504607798333-52a30db54a5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  margin-right: 6rem;
+}
+
+.container-avantage-img-right {
+  width: 60rem;
+  height: 15rem;
+  background-image: url(https://images.unsplash.com/photo-1504607798333-52a30db54a5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  margin-left: 6rem;
 }
