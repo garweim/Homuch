@@ -2,6 +2,7 @@ class Project < ApplicationRecord
   STATE = %w(good bad average)
   belongs_to :user
   has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures
   has_many :renovations, dependent: :destroy
   has_many :estimates, dependent: :destroy
 
