@@ -11,7 +11,7 @@ class DetailedEstimate
   attr_reader :params
 
   def total_estimate
-    (market_price_estimate * registration_fees) - total_price
+    (market_price_estimate + registration_fees) - total_price
   end
 
   def registration_fees
