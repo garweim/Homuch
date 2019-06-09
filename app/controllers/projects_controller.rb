@@ -11,11 +11,15 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     perform_simple_estimate
+    @picture = @project.pictures.build
   end
 
   def create
     if current_user
       create_project
+      params[:pictures]['photo'].each do |a|
+        @picture = @project.pictures.create!(:photo => a,     :project_id => @project.id)
+      end
       redirect_to project_path(@project) if @project.errors.none?
     else
       save_project_data_in_session
@@ -28,6 +32,7 @@ class ProjectsController < ApplicationController
     find_id
     perform_detailed_estimate
     map_single_project
+    @pictures = @project.pictures.all
   end
 
   # def update
@@ -48,7 +53,7 @@ class ProjectsController < ApplicationController
     params.require(:project)
       .permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms,
               :category, :garage, :heating, :electricity, :kitchen, :sanitation,
-              :zipcode, :name, :state)
+              :zipcode, :name, :state, pictures_attributes: [:id, :project_id, :photo])
   end
 
   def find_id

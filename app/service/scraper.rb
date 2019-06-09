@@ -2,8 +2,9 @@
 require 'nokogiri'
 
 class Scraper
-  attr_reader :project, :html_doc
-
+  attr_reader :project, :html_doc, :attributes
+  attr_writer :attributes
+  ZIPCODE = [1000, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1210]
   def call(zipcode)
     @zipcode = zipcode
     @url = "https://www.logic-immo.be/en/buy/apartments-for-sale/-#{@zipcode}.html"
@@ -12,6 +13,12 @@ class Scraper
     #parse_projects_data
   end
 
+  def self.scrape
+    ZIPCODE.each do |zip|
+      Scraper.new.call(zip)
+      SellMarket.find_or_create_by(@attributes)
+    end
+  end
   private
 
   # def url
@@ -41,7 +48,6 @@ class Scraper
         price: get_price(house_doc)
       }
       p attributes
-      SellMarket.find_or_create_by(attributes)
     end
   end
 
