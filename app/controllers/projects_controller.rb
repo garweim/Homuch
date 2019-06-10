@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    # check if user signed in
     if current_user
       create_project
       # call estimate service
@@ -24,10 +25,23 @@ class ProjectsController < ApplicationController
       # save return in estimate table ->
       @project.estimates.create(
         market_price: @detailed_estimate,
-        simple_price: @simple_estimate
-      )
-      # @estimate = @project.estimates.create(estimate_params)
-      redirect_to project_path(@project) if @project.errors.none? #&& @estimate.errors.none
+        simple_price: @simple_estimate)
+      
+      # @estimate = @project.estimates.create(estimate_params
+      # check if project is created
+     
+        if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
+        end
+      
+      if @project.errors.none?
+        redirect_to project_path(@project) #&& @estimate.errors.none
+      else
+        render :new
+      end
+
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -41,6 +55,7 @@ class ProjectsController < ApplicationController
     perform_detailed_estimate
     @renovation_details = ::RenovationCalculator.new(@project)
     map_single_project
+    @pictures = @project.pictures
   end
 
   def update
@@ -57,7 +72,7 @@ class ProjectsController < ApplicationController
     params.require(:project)
       .permit(:street_and_nr, :surface, :nr_of_bedrooms, :nr_of_bathrooms,
               :category, :garage, :heating, :electricity, :kitchen, :sanitation,
-              :zipcode, :name, :state)
+              :zipcode, :name, :state, pictures_attributes: [:id, :project_id, :photo])
   end
 
   def find_id
