@@ -30,7 +30,8 @@
             <p><strong><%= 'Kitchen' if @project.kitchen %></strong> </p>
             <p><strong><%= 'sanitation' if @project.sanitation %></strong> </p>
             <p><strong><%= 'electricity' if @project.electricity %></strong> </p>
-            <%=  @project.pictures.each do |pic| %>
+            <%  @project.pictures.each do |pic| %>
+              <% puts "bla3" %>
               <%= cl_image_tag pic.photo, height: 300, width: 400, crop: :fill %>
             <% end %>
           </div>
