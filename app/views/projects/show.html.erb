@@ -67,6 +67,16 @@
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
+<%= javascript_pack_tag "chart" %>
+<br>
+<br>
+<p>Average price for an appartment in Ixelles for the period 2010-2019</p>
+<%= line_chart [["2010", 242393], ["2011", 258216], ["2012", 265773], ["2013", 278286], ["2014", 267549], ["2015", 259995],["2016", 295558], ["2017", 312703],["2018", 330121], ["2019", 348508]], xtitle: "Time", ytitle: "Market price", min: 200000, max: 500000, width: "800px", height: "500px" %>
+<br>
+<br>
+<p>Interest rate evolution for the period 2010-2019</p>
+<%= line_chart [["2010", 3,71], ["2011", 3,95], ["2012", 4,25], ["2013", 2,2], ["2014", 2,54], ["2015", 0,81],["2016", 0,93], ["2017", 0,65],["2018", 0,66], ["2019", 0,73]], xtitle: "Time", ytitle: "Interest rate", min: 0, max: 5, width: "800px", height: "500px" %>
+
 
 
 
