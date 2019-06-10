@@ -26,16 +26,16 @@ class ProjectsController < ApplicationController
       @project.estimates.create(
         market_price: @detailed_estimate,
         simple_price: @simple_estimate)
-      
+
       # @estimate = @project.estimates.create(estimate_params
       # check if project is created
-     
+
         if params[:pictures]
           params[:pictures]['photo'].each do |a|
             @picture = @project.pictures.create!(photo: a)
           end
         end
-      
+
       if @project.errors.none?
         redirect_to project_path(@project) #&& @estimate.errors.none
       else
@@ -60,6 +60,18 @@ class ProjectsController < ApplicationController
 
   def update
     @project.update(projects_params)
+  end
+
+
+  def new_loan
+    @project = Project.find(params[:id])
+    # instead of this controller rendering a view;
+    # it will render a javascript template
+    #  -> new_loan.js.erb
+    @loan_rate = params[:loan_calculation][:rate].to_f
+    @loan_years = params[:loan_calculation][:years].to_i
+    @estimate = @project.estimates.last
+    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years)
   end
 
   # def destroy
