@@ -6,18 +6,14 @@
     <title>TODO</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %>
     <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <%= stylesheet_pack_tag 'application', media: 'all' %>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700,900&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/9a491da1b6.js"></script>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
   </head>
   <body>
-    <style>
-      body { background-color: #EBF3EC; }
-    </style>
     <div class="wrapper">
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
