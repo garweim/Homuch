@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
-    #@projects = Project.all
+    # @projects = Project.all
     @projects = Project.where.not(latitude: nil, longitude: nil)
     map_all_projects
   end
@@ -11,16 +11,37 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     perform_simple_estimate
-    @picture = @project.pictures.build
   end
 
   def create
+    # check if user signed in
     if current_user
       create_project
-      params[:pictures]['photo'].each do |a|
-        @picture = @project.pictures.create!(:photo => a,     :project_id => @project.id)
+      # call estimate service
+      @detailed_estimate = perform_detailed_estimate
+      @simple_estimate = perform_simple_estimate
+
+      # we create a estimate for this project
+      # save return in estimate table ->
+      @project.estimates.create(
+        market_price: @detailed_estimate,
+        simple_price: @simple_estimate)
+      
+      # @estimate = @project.estimates.create(estimate_params
+      # check if project is created
+     
+        if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
+        end
+      
+      if @project.errors.none?
+        redirect_to project_path(@project) #&& @estimate.errors.none
+      else
+        render :new
       end
-      redirect_to project_path(@project) if @project.errors.none?
+
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -30,18 +51,16 @@ class ProjectsController < ApplicationController
 
   def show
     find_id
+    perform_simple_estimate
     perform_detailed_estimate
+    @renovation_details = ::RenovationCalculator.new(@project)
     map_single_project
-    @pictures = @project.pictures.all
+    @pictures = @project.pictures
   end
 
-  # def update
-  #   @project.update(projects_params)
-  # end
   def update
     @project.update(projects_params)
   end
-
 
   # def destroy
   #   @project.destroy
@@ -80,12 +99,12 @@ class ProjectsController < ApplicationController
   end
 
   def perform_simple_estimate
-    @simple_estimate = ::SimpleEstimate.new.market_price(session_projects_params)
+    @simple_estimate = (::SimpleEstimate.new.market_price(session_projects_params)).to_i
   end
 
   def perform_detailed_estimate
-    @detailed_estimate = ::DetailedEstimate.new.call(@project)
-    # @detailed_estimate = ::DetailedEstimate.new.call(@project)
+    @detailed_estimate = (::DetailedEstimate.new.call(@project)).to_i
+    # @detailed_estimate = ::DetailedEstimate.new.call(@create_project)
   end
 
   def map_single_project
