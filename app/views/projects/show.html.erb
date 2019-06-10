@@ -18,27 +18,33 @@
         <div class="category-card">
           <div class="card-search_search">
             <h5>Details of your search</h5>
-            <p><strong>Type of asset:</strong> <%= session[:category]%></p>
-            <p><strong>Address:</strong> <%= session[:zipcode]%></p>
-            <p><strong>Surface:</strong> <%= session[:surface]%> sqm</p>
-            <p><strong>Nr. of bedrooms:</strong> <%= session[:nr_of_bedrooms] %></p>
-            <p><strong>Nr. of bathrooms:</strong> <%= session[:nr_of_bathrooms]%></p>
+            <p><strong>Type of asset:</strong><%= @project.category %></p>
+            <p><strong>Address:</strong> <%= @project.zipcode%></p>
+            <p><strong>Surface:</strong> <%= @project.surface%> sqm</p>
+            <p><strong>Nr. of bedrooms:</strong> <%= @project.nr_of_bedrooms %></p>
+            <p><strong>Nr. of bathrooms:</strong> <%= @project.nr_of_bathrooms%></p>
             <p><strong>state of asset:</strong> <%= @project.state%></p>
             <p><strong>garage:</strong> <%= @project.garage%></p>
-            <h4>Renovations to be done</h4>
-            <p><strong><%= 'Heating' if @project.heating %></strong> </p>
-            <p><strong><%= 'Kitchen' if @project.kitchen %></strong> </p>
-            <p><strong><%= 'sanitation' if @project.sanitation %></strong> </p>
-            <p><strong><%= 'electricity' if @project.electricity %></strong> </p>
+            <h4>Asset Value</h4>
+            <p><strong><%= @simple_estimate %> € </strong></p>
+            <h4>Asset Registration Fees </h4>
+            <p><strong><%= (@simple_estimate * 0.15).to_i  %>€</strong></p>
+             <h4>Total price with registration fee</h4>
+              <p><strong><%= ((@simple_estimate * 0.15) + @simple_estimate).to_i %> € </strong></p>
+            <h4>Renovation to be done</h4>
+            <p><strong><%= "Heating Coast: #{@renovation_details.heating_price} €" if @project.heating %></strong> </p>
+            <p><strong><%= "Kitchen Coast: 7000€" if @project.kitchen %></strong></p>
+            <p><strong><%= "Sanitation Coast: #{@renovation_details.sanitation_price} " if @project.sanitation %> € </strong> </p>
+            <p><strong><%= "Electricity Coast: #{@renovation_details.electricity_price} " if @project.electricity %> €</strong> </p>
+            <h4>Total Renovation Coast</h4>
+            <p> <strong><%= @renovation_details.total_price  %> € </strong></p> 
             <%  @project.pictures.each do |pic| %>
               <% puts "bla3" %>
               <%= cl_image_tag pic.photo, height: 300, width: 400, crop: :fill %>
             <% end %>
+
           </div>
           <br>
-
-
-
 
           <%# if session[:surface]  %>
           <%# end %>
