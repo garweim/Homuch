@@ -11,16 +11,23 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     perform_simple_estimate
-    @picture = @project.pictures.build
   end
 
   def create
+    # check if user signed in
     if current_user
       create_project
-      params[:pictures]['photo'].each do |a|
-        @picture = @project.pictures.create!(:photo => a,     :project_id => @project.id)
+      # check if project is created
+      if @project.errors.none?
+        if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
+        end
+        redirect_to project_path(@project)
+      else
+        render :new
       end
-      redirect_to project_path(@project) if @project.errors.none?
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -32,7 +39,7 @@ class ProjectsController < ApplicationController
     find_id
     perform_detailed_estimate
     map_single_project
-    @pictures = @project.pictures.all
+    @pictures = @project.pictures
   end
 
   # def update
