@@ -4,21 +4,39 @@ require 'nokogiri'
 class Scraper
   attr_reader :project, :html_doc, :attributes
   attr_writer :attributes
-  ZIPCODE = [1000, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1210]
-  def call(zipcode)
+  #ZIPCODE = [1000, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1210]
+  #PAGES = ["", ",2", ",3", ",4", ",5", ",6", ",7", ",8"]
+  ZIPCODE = [1000, 1020, 1030]
+  PAGES = ["", ",2", ",3"]
+
+  def call(zipcode, type)
     @zipcode = zipcode
-    @url = "https://www.logic-immo.be/en/buy/apartments-for-sale/-#{@zipcode}.html"
-    @html_doc = Nokogiri::HTML(HTTParty.get(@url).body)
-    scrape_houses
+    PAGES.each do |page|
+      url_sale = "https://www.logic-immo.be/en/buy/apartments-for-sale/-#{@zipcode}#{page}.html"
+      url_rent = "https://www.logic-immo.be/en/rent/apartments-for-rent/-#{@zipcode}#{page}.html"
+      if type == "sale"
+        @url = url_sale
+      else
+        @url = url_rent
+      end
+      @html_doc = Nokogiri::HTML(HTTParty.get(@url).body)
+      scrape_houses(type, @zipcode, @html_doc)
+    end
     #parse_projects_data
   end
 
-  def self.scrape
-    ZIPCODE.each do |zip|
-      Scraper.new.call(zip)
-      SellMarket.find_or_create_by(@attributes)
+  def self.scrape(type)
+    if type == "sale"
+      ZIPCODE.each do |zip|
+        Scraper.new.call(zip, type)
+      end
+    elsif type == "rent"
+      ZIPCODE.each do |zip|
+        Scraper.new.call(zip, type)
+      end
     end
   end
+
   private
 
   # def url
@@ -31,23 +49,30 @@ class Scraper
   #   @html_doc = Nokogiri::HTML(html_file)
   # end
 
-  def scrape_houses
-    @html_doc.search('div.list-group-item div.property-description').each do |house|
+  def scrape_houses(type, zipcode, html_doc)
+    html_doc.search('div.list-group-item div.property-description').each do |house|
       # p house
       house_link = house.search("a").first.attribute("href").value
-      p house_link
       url = "https://www.logic-immo.be#{house_link}"
-      p url
       house_doc = Nokogiri::HTML(HTTParty.get(url).body)
       house_details = house_doc.search("#property-details-icons")
       attributes = {
-        zipcode: @zipcode,
+        zipcode: zipcode,
         surface: get_surface(house_details),
         nr_of_bedrooms: get_bedrooms(house_details),
         nr_of_bathrooms: get_bathrooms(house_details),
         price: get_price(house_doc)
       }
-      p attributes
+      attributes
+      create_object(type, attributes)
+    end
+  end
+
+  def create_object(type, attributes)
+    if type == "sale"
+      SellMarket.find_or_create_by!(attributes)
+    elsif type == "rent"
+      RentalMarket.find_or_create_by!(attributes)
     end
   end
 
