@@ -1,32 +1,67 @@
-<h2>Sign up</h2>
+<!-- <h2>Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+<%#= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%#= f.error_notification %>
 
   <div class="form-inputs centralize-form">
-    <%= f.input :first_name,
+    <%#= f.input :first_name,
                 required: true, class: "label" %>
-    <%= f.input :last_name,
+    <%#= f.input :last_name,
                 required: true, class: "label" %>
 
-    <%= f.input :email,
+    <%#= f.input :email,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }, class: "label"%>
-    <%= f.input :password,
+    <%#= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" }, class: "label" %>
-    <%= f.input :password_confirmation,
+    <%#= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" }, class: "label" %>
 
     <div class="form-action">
-      <%= f.button :submit, "Sign up", class: "btn-green" %>
+      <%#= f.button :submit, "Sign up", class: "btn-green" %>
     </div>
   </div>
 
 
-<% end %>
+<%# end %> -->
+
+
+<div class="banner-new">
+  <div class="container-form">
+    <div class="form-style">
+      <h3 id="sign-upp">SIGN UP</h3>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+          <div class="form-card">
+            <div class="form-inputs">
+              <%= f.input :first_name,
+                  required: true, class: "label" %>
+      <%= f.input :last_name,
+                  required: true, class: "label" %>
+
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" }, class: "label"%>
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" }, class: "label" %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" }, class: "label" %>
+            </div>
+            <%= f.button :submit, "Sign up", id: "btn-green" %>
+          <% end  %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <% render "devise/shared/links" %>
