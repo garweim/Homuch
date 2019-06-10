@@ -1,6 +1,6 @@
 h1 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bolder;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: bold !important;
   font-size: 64px;
   color: white;
 }
@@ -15,9 +15,11 @@ h2 {
 h3 {
   font-family: 'Roboto', sans-serif;
   font-weight: bold !important;
-  font-size: 24px !important;
-  color: #095228;
+  font-size: 15px !important;
+  color: #1A1D1A;
   margin-bottom: 1rem;
+  letter-spacing: 4px;
+
 }
 
 h4 {
