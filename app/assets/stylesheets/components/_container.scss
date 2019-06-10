@@ -13,6 +13,10 @@
   margin: 3rem 0rem 5rem 0rem;
 }
 
+.carousel-inner {
+  max-height: 300px !important;
+}
+
 .container-steps {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
