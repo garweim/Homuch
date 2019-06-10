@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="101px" height="60px" viewBox="0 0 101 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>search copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons" transform="translate(-583.000000, -434.000000)">
+            <g id="search-copy" transform="translate(583.000000, 434.000000)">
+                <g id="Group-6">
+                    <g id="Group-4">
+                        <rect id="Rectangle" fill="#20BC62" x="0" y="0.895833333" width="74.7540984" height="48" rx="3.43"></rect>
+                        <rect id="Rectangle" fill="#16A050" x="29.3338867" y="48.8958333" width="16.086325" height="6.5625"></rect>
+                        <rect id="Rectangle-Copy-3" fill="#16A050" transform="translate(36.903922, 57.260417) scale(1, -1) translate(-36.903922, -57.260417) " x="22.7101058" y="54.59375" width="28.3876323" height="5.33333333" rx="2"></rect>
+                    </g>
+                    <rect id="Rectangle" fill="#16A050" x="27.5409836" y="13.7704918" width="20.6557377" height="4.91803279" rx="2.45901639"></rect>
+                    <rect id="Rectangle-Copy-7" fill="#16A050" x="27.5409836" y="33.442623" width="14.7540984" height="4.91803279" rx="2.45901639"></rect>
+                    <ellipse id="Oval" stroke="#FFFFFF" stroke-width="5" fill="#20BC62" cx="73.7704918" cy="35.4098361" rx="23.0737705" ry="22.0901639"></ellipse>
+                    <circle id="Oval-Copy-3" stroke="#FFFFFF" stroke-width="6" fill="#20BC62" cx="72.7868852" cy="35.4098361" r="21.5901639"></circle>
+                    <circle id="Oval" fill="#FFFFFF" cx="72.7868852" cy="35.4098361" r="12.7868852"></circle>
+                    <path d="M85.5737705,46.2295082 L97.6502732,56.3729508" id="Path-3" stroke="#20BC62" stroke-width="6" stroke-linecap="round"></path>
+                </g>
+                <g id="Group-7" transform="translate(6.885246, 7.868852)">
+                    <rect id="Rectangle" fill="#FFFFFF" x="3.93442623" y="5.90163934" width="8.85245902" height="7.86885246" rx="0.9"></rect>
+                    <rect id="Rectangle" fill="#20BC62" x="6.8852459" y="10.8196721" width="2.95081967" height="4.91803279"></rect>
+                    <path d="M5.12361188,2.95081967 L12.8704918,2.95081967 C13.3675481,2.95081967 13.7704918,3.3537634 13.7704918,3.85081967 L13.7704918,11.5976996 C13.7704918,12.0947559 13.3675481,12.4976996 12.8704918,12.4976996 C12.631797,12.4976996 12.4028784,12.4028784 12.2340957,12.2340957 L4.48721578,4.48721578 C4.13574391,4.13574391 4.13574391,3.56589543 4.48721578,3.21442357 C4.65599852,3.04564083 4.88491704,2.95081967 5.12361188,2.95081967 Z" id="Rectangle-Copy-6" fill="#FFFFFF" transform="translate(8.360656, 8.360656) rotate(-45.000000) translate(-8.360656, -8.360656) "></path>
+                </g>
+                <g id="Group-7-Copy" transform="translate(6.885246, 26.557377)">
+                    <rect id="Rectangle" fill="#FFFFFF" x="3.93442623" y="5.90163934" width="8.85245902" height="7.86885246" rx="0.9"></rect>
+                    <rect id="Rectangle" fill="#20BC62" x="6.8852459" y="10.8196721" width="2.95081967" height="4.91803279"></rect>
+                    <path d="M5.12361188,2.95081967 L12.8704918,2.95081967 C13.3675481,2.95081967 13.7704918,3.3537634 13.7704918,3.85081967 L13.7704918,11.5976996 C13.7704918,12.0947559 13.3675481,12.4976996 12.8704918,12.4976996 C12.631797,12.4976996 12.4028784,12.4028784 12.2340957,12.2340957 L4.48721578,4.48721578 C4.13574391,4.13574391 4.13574391,3.56589543 4.48721578,3.21442357 C4.65599852,3.04564083 4.88491704,2.95081967 5.12361188,2.95081967 Z" id="Rectangle-Copy-6" fill="#FFFFFF" transform="translate(8.360656, 8.360656) rotate(-45.000000) translate(-8.360656, -8.360656) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

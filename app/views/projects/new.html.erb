@@ -2,7 +2,7 @@
 </div>
 <div class="container-form">
   <div class="form-style">
-    <h3 id="sign-upp">Estimate your asset</h3>
+    <h3 id="sign-upp">ESTIMATE YOUR ASSET</h3>
       <%= simple_form_for(@project) do |f| %>
         <div class="form-card">
           <div class="form-inputs">
@@ -20,15 +20,21 @@
               <%= f.input :electricity %>
               <%= f.input :kitchen %>
               <%= f.input :sanitation %>
+              <%= f.fields_for :picture do |p| %>
+                <%= p.label :photo %><br>
+                <%= p.file_field :photo, :multiple => true, name: "pictures[photo][]" %>
+                <%= p.input :photo_cache, as: :hidden %>
+              <% end %>
             <% end  %>
           </div>
-          <%= f.submit :submit, class: "btn-green" %>
+          <%= f.submit :Submit, class: "btn-green" %>
 
         <% end  %>
       </div>
     </div>
   </div>
 </div>
+
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
