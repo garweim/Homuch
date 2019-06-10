@@ -14,4 +14,15 @@ class Project < ApplicationRecord
 
   geocoded_by :street_and_nr
   after_validation :geocode, if: :will_save_change_to_street_and_nr?
+
+  # after_create :build_estimate
+
+  private
+
+  # def build_estimate
+
+  #   #do stuff create estimate
+  #   estimate = Estimate.new(stuff:stuff)
+  #   estimate.project = self
+  # end
 end

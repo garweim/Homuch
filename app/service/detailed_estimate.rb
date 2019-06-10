@@ -1,17 +1,16 @@
 class DetailedEstimate
-  def call(params)
-    @params = params
+  def call(project)
+    @project = project
     return unless market_price_estimate
-
     total_estimate
   end
 
-  private
+  # private
 
-  attr_reader :params
+  attr_reader :project
 
   def total_estimate
-    (market_price_estimate + registration_fees) - total_price
+    (market_price_estimate + registration_fees) - renovation_price
   end
 
   def registration_fees
@@ -19,12 +18,12 @@ class DetailedEstimate
   end
 
   def market_price_estimate
-    @market_price ||= SimpleEstimate.new.market_price(params)
-    # SimpleEstimate.new.market_price(params)
+    @market_price ||= SimpleEstimate.new.market_price(@project)
+    # SimpleEstimate.new.market_price(project)
   end
 
-  def total_price
-    @total_price ||= RenovationCalculator.new.call(params)
+  def renovation_price
+    @renovation_price ||= RenovationCalculator.new(@project).total_price
   end
 end
 # DetailedEstimate.new.call_detailed(Project.last)
