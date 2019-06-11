@@ -16,3 +16,7 @@ class Calculation
   end
 end
 
+# if €/sqm == 0
+#   render the same page
+# else
+#   sum/sqm
