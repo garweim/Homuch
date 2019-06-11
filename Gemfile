@@ -9,10 +9,12 @@ gem 'puma'
 gem 'rails', '5.2.3'
 gem 'redis'
 
-#geocode gem
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+# geocode gem
 gem 'geocoder'
 
-#chart gems
+# chart gems
 gem "chartkick"
 gem 'groupdate'
 

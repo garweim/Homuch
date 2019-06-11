@@ -94,7 +94,7 @@
         <p><strong><%= "Electricity Coast: #{@renovation_details.electricity_price} " if @project.electricity %> €</strong> </p>
         <h4>Total Renovation Coast</h4>
         <p> <strong><%= @renovation_details.total_price  %> € </strong></p>
-
+            <%= link_to 'Download your estimate on PDF format', project_path(@project, format: :pdf) %>
       </div>
     </div>
   </div>
