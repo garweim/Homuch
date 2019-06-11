@@ -1,3 +1,7 @@
+     <!--  <div class="header"> -->
+         <!-- <div class="result-estimate">
+            <h4><%#= @detailed_estimate %>€</h4> -->
+            <!-- <h4><%#= @project.estimates.last.market_price %>€</h4> -->
 <div class="main-container">
   <div class="container-projects">
     <div class= "content-center">
@@ -98,9 +102,6 @@
       </div>
     </div>
   </div>
-
-          <%# if session[:surface]  %>
-          <%# end %>
   <div
     id="map"
     style="width: 40%;
@@ -109,6 +110,9 @@
     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 </div>
+
+          <%# if session[:surface]  %>
+          <%# end %>
 <%= javascript_pack_tag "chart" %>
 <br>
 <br>
@@ -119,6 +123,15 @@
 <p>Interest rate evolution for the period 2010-2019</p>
 <%= line_chart [["2010", 3,71], ["2011", 3,95], ["2012", 4,25], ["2013", 2,2], ["2014", 2,54], ["2015", 0,81],["2016", 0,93], ["2017", 0,65],["2018", 0,66], ["2019", 0,73]], xtitle: "Time", ytitle: "Interest rate", min: 0, max: 5, width: "800px", height: "500px" %>
 
+<div>
+  <h3>Get a new loan calculation for this project</h3>
+  <%= simple_form_for :loan_calculation, url: new_loan_project_path(@project), remote: true do |f| %>
+    <%= f.input :rate, collection: [0.01,0.02,0.03,0.04,0.05] %>
+    <%= f.input :years, collection: [5,10,15,20,25] %>
+    <%= f.submit "Calculate loan 🤡", class: "btn btn-primary"  %>
+  <% end %>
+  <div id="loan-calculation"></div>
+</div>
 
 
 
