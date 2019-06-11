@@ -79,11 +79,9 @@
           </div>
         </div>
       </div>
-
       <div class="col-12 col-md-4">
         <p id="estimate-details-title">ESTIMATE DETAILS</p>
         <div class="card-details-show">
-
           <div class="result-estimate">
             <h4><%= @simple_estimate %>€</h4>
           </div>
@@ -99,7 +97,6 @@
                 <p><%= @simple_estimate %> € </p>
                 <p><%= (@simple_estimate * 0.15).to_i  %>€</p>
                 <p><%= ((@simple_estimate * 0.15) + @simple_estimate).to_i %> €</p>
-
               </div>
             </div>
             <p><strong>RENOVATION COSTS</strong></p>
@@ -117,94 +114,33 @@
                   <% else %>
                     <p>0 €</p>
                   <% end %>
-
                   <% if @project.electricity %>
                     <p><%= @renovation_details.electricity_price %> €</p>
                   <% else %>
                     <p>0 €</p>
                   <% end %>
-
                   <% if @project.sanitation %>
                     <p><%= @renovation_details.sanitation_price %> €</p>
                   <% else %>
                     <p>0 €</p>
                   <% end %>
-
                   <% if @project.kitchen %>
                     <p><%= @renovation_details.kitchen_price %> €</p>
                   <% else %>
                     <p>0 €</p>
                   <% end %>
                 <p><%= @renovation_details.total_price  %> €</p>
-
               </div>
             </div>
           </div>
 <!--
-
           <p>Asset Value: <%= @simple_estimate %> € </p>
           <p>Registration Fees: <%#= (@simple_estimate * 0.15).to_i  %>€</p>
            <p>Total price with registration fee: <%#= ((@simple_estimate * 0.15) + @simple_estimate).to_i %> €</p>
           <p>Renovation to be done</p>
           <p><strong><%#= "Heating Cost: #{@renovation_details.heating_price} €" if @project.heating %></strong> </p>
           <p><strong><%#= "Kitchen Cost: 7000€" if @project.kitchen %></strong></p>
-          <p><strong><%#= "Sanitation Cost: #{@renovation_details.sanitation_price} " if @project.sanitation %> € </strong> </p>
-          <p><strong><%#= "Electricity Cost: #{@renovation_details.electricity_price} " if @project.electricity %> €</strong> </p>
-          <p>Total Renovation Cost: <%= @renovation_details.total_price  %> €</p>
-          <p> <strong> </strong></p> -->
+          <p><strong><%#= "Sanitation Cost: #{@renovation_details.sanitation_price} " if @project.s
 
 
-              <%#= link_to 'Download your estimate on PDF format', project_path(@project, format: :pdf) %>
 
-        </div>
-      </div>
-
-      <div class="col-12 col-md-4">
-        <p id="estimate-details-title">LOCATION</p>
-        <div class="map-show">
-          <div
-            id="map"
-            style="width: 40%;
-            height: 21rem !important;"
-            data-markers="<%= @markers.to_json %>"
-            data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-  <%= javascript_pack_tag "chart" %>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-4">
-        <p id="estimate-details-title">10Y PRICE EVOLUTION</p>
-        <div class="card-details-show">
-          <%= line_chart [["2010", 242393], ["2011", 258216], ["2012", 265773], ["2013", 278286], ["2014", 267549], ["2015", 259995],["2016", 295558], ["2017", 312703],["2018", 330121], ["2019", 348508]], xtitle: "Time", ytitle: "Market price", min: 200000, max: 500000, width: "250px", height: "250px" %>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-4">
-        <p id="estimate-details-title">INTEREST RATE</p>
-        <div class="card-details-show">
-          <%= line_chart [["2010", 3,71], ["2011", 3,95], ["2012", 4,25], ["2013", 2,2], ["2014", 2,54], ["2015", 0,81],["2016", 0,93], ["2017", 0,65],["2018", 0,66], ["2019", 0,73]], xtitle: "Time", ytitle: "Interest rate", min: 0, max: 5, width: "250px", height: "250px" %>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-4">
-        <p id="estimate-details-title">LOAN CALCULATOR</p>
-        <div class="card-details-show">
-          <%= simple_form_for :loan_calculation, url: new_loan_project_path(@project), remote: true do |f| %>
-            <%= f.input :rate, collection: [0.01,0.02,0.03,0.04,0.05] %>
-            <%= f.input :years, collection: [5,10,15,20,25] %>
-            <%= f.submit "Calculate Loan", id: "btn-green"  %>
-          <% end %>
-          <div id="loan-calculation"></div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>

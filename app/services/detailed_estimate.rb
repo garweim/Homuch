@@ -10,7 +10,7 @@ class DetailedEstimate
   attr_reader :project
 
   def total_estimate
-    (market_price_estimate) - renovation_price
+    market_price_estimate - renovation_price
   end
 
   def registration_fees

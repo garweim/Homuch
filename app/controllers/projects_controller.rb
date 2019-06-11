@@ -1,11 +1,11 @@
 class ProjectsController < ApplicationController
-  before_action :find_id, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :new_loan]
   skip_before_action :authenticate_user!, only: [:index, :new, :create]
 
   def index
     # @projects = Project.all
     @projects = Project.where.not(latitude: nil, longitude: nil)
-    map_all_projects
+    @markers = map_all_projects(@projects)
   end
 
   def new
@@ -28,21 +28,6 @@ class ProjectsController < ApplicationController
         simple_price: @simple_estimate,
         project: @project
       )
-      # @estimate = @project.estimates.create(estimate_params)
-      # check if project is created
-
-      # if params[:pictures]
-      #   params[:pictures]['photo'].each do |a|
-      #     @picture = @project.pictures.create!(photo: a)
-      #   end
-      # end
-      # if the project does not have any errors,
-      # and the estimate got saved properly
-      # then we redirect
-      # if @project.errors.none? && @estimate.save
-      #   redirect_to project_path(@project)
-      # end
-
       if @project.save && @estimate.save
         # @project.estimates.create(
         #   market_price: @detailed_estimate,
@@ -60,9 +45,7 @@ class ProjectsController < ApplicationController
         # but the record gets destroyed, so we dont recreate it upon second save
         @project.destroy
         render :new
-      end
-
-      #render :new if @simple_estimate == 0
+      end     
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -71,11 +54,10 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    find_id
-    perform_simple_estimate
-    perform_detailed_estimate
+    @simple_estimate = perform_simple_estimate
+    @detailed_estimate = perform_detailed_estimate
     @renovation_details = ::RenovationCalculator.new(@project)
-    map_single_project
+    @markers = map_single_project
     @pictures = @project.pictures
     respond_to do |format|
       format.html
@@ -88,18 +70,14 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
     @project.edit
   end
 
-
   def destroy
-    @project = Projectt.find(params[:id])
     @project.destroy
   end
 
   def new_loan
-    @project = Project.find(params[:id])
     # instead of this controller rendering a view;
     # it will render a javascript template
     #  -> new_loan.js.erb
@@ -110,10 +88,6 @@ class ProjectsController < ApplicationController
     #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
   end
 
-  # def destroy
-  #   @project.destroy
-  # end
-
   private
 
   def projects_params
@@ -123,7 +97,7 @@ class ProjectsController < ApplicationController
               :zipcode, :name, :state, pictures_attributes: [:id, :project_id, :photo])
   end
 
-  def find_id
+  def set_project
     @project = Project.find(params[:id])
   end
 
@@ -147,16 +121,16 @@ class ProjectsController < ApplicationController
   end
 
   def perform_simple_estimate
-    @simple_estimate = (::SimpleEstimate.new.market_price(session_projects_params)).to_i
+    ::SimpleEstimate.new.market_price(session_projects_params)
   end
 
   def perform_detailed_estimate
-    @detailed_estimate = (::DetailedEstimate.new.call(@project)).to_i
+    ::DetailedEstimate.new.call(@project)
     # @detailed_estimate = ::DetailedEstimate.new.call(@create_project)
   end
 
   def map_single_project
-    @markers = [
+    [
       {
         lat: @project.latitude,
         lng: @project.longitude
@@ -164,8 +138,8 @@ class ProjectsController < ApplicationController
     ]
   end
 
-  def map_all_projects
-    @markers = @projects.map do |project|
+  def map_all_projects(projects)
+    projects.map do |project|
       {
         lat: project.latitude,
         lng: project.longitude,
