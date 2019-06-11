@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
       end
       if @project.errors.none?
         redirect_to project_path(@project) #&& @estimate.errors.none
+      end
     else
       save_project_data_in_session
       perform_simple_estimate

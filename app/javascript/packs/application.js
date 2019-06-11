@@ -17,13 +17,8 @@ import { initMapbox } from '../components/init_map';
 
 initMapbox();
 
-import places from 'places.js';
+import { initAutocomplete } from '../components/init_autocomplete';
 
-const initAutocomplete = () => {
-  const addressInput = document.getElementById('project_street_and_nr');
-  if (addressInput) {
-    places({ container: addressInput });
-  }
-};
+initAutocomplete();
 
 
