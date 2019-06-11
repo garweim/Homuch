@@ -63,13 +63,15 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def update
-    @project.update(projects_params)
+  def edit
+    @project = Project.find(params[:id])
+    @project.edit
   end
 
-  # def destroy
-  #   @project.destroy
-  # end
+  def destroy
+    @project = Projectt.find(params[:id])
+    @project.destroy
+  end
 
   private
 
