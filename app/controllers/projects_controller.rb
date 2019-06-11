@@ -11,6 +11,9 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     perform_simple_estimate
+    # if @simple_estimate == 0
+    #  render :new
+    # end
   end
 
   def create
@@ -20,6 +23,26 @@ class ProjectsController < ApplicationController
       @simple_estimate = perform_simple_estimate
       # we create a estimate for this project
       # save return in estimate table ->
+
+      @estimate = Estimate.new(
+        market_price: @detailed_estimate,
+        simple_price: @simple_estimate,
+        project: @project
+      )
+      # @estimate = @project.estimates.create(estimate_params
+      # check if project is created
+
+      if params[:pictures]
+        params[:pictures]['photo'].each do |a|
+          @picture = @project.pictures.create!(photo: a)
+        end
+      end
+      # if the project does not have any errors,
+      # and the estimate got saved properly
+      # then we redirect
+      if @project.errors.none? && @estimate.save
+        redirect_to project_path(@project)
+
       if @project.save
         @project.estimates.create(
           market_price: @detailed_estimate,
@@ -30,9 +53,21 @@ class ProjectsController < ApplicationController
           end
         end
         redirect_to project_path(@project) #&& @estimate.errors.none
+>>>>>>> master
       else
+        # we need to remove the project from the DB
+        # we can still use the @project in the form in the new page
+        # but the record gets destroyed, so we dont recreate it upon second save
+        @project.destroy
         render :new
       end
+<<<<<<< HEAD
+
+      #render :new if @simple_estimate == 0
+
+
+=======
+>>>>>>> master
     else
       save_project_data_in_session
       perform_simple_estimate
