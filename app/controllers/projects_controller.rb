@@ -76,7 +76,8 @@ class ProjectsController < ApplicationController
     @loan_rate = params[:loan_calculation][:rate].to_f
     @loan_years = params[:loan_calculation][:years].to_i
     @estimate = @project.estimates.last
-    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years)
+    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years).round(1)
+    #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
   end
 
   # def destroy
