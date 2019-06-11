@@ -10,10 +10,11 @@ class EstimatesController < ApplicationController
   def new
     # projects/project_id/estimates/new
     @estimate = Estimate.new(params[:project_id]) #find the project  based on pr_id
-    perfom_detailed_estimate # call estimate service again
+    @detailed_estimate = perfom_detailed_estimate # call estimate service again
     @estimate.save!
     redirect to project_path(@project) if @estimate.errors.none?#link it to project
-    #save the estimate
+
+    # save the estimate
   end
 
   def create
@@ -26,6 +27,6 @@ class EstimatesController < ApplicationController
   end
 
   def perform_detailed_estimate
-    @detailed_estimate = ::DetailedEstimate.new.call(@project)
+    ::DetailedEstimate.new.call(@project)
   end
 end

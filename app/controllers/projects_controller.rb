@@ -105,11 +105,11 @@ class ProjectsController < ApplicationController
   end
 
   def perform_simple_estimate
-    (::SimpleEstimate.new.market_price(session_projects_params)).to_i
+    ::SimpleEstimate.new.market_price(session_projects_params)
   end
 
   def perform_detailed_estimate
-    (::DetailedEstimate.new.call(@project)).to_i
+    ::DetailedEstimate.new.call(@project)
     # @detailed_estimate = ::DetailedEstimate.new.call(@create_project)
   end
 
