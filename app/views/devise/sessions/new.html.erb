@@ -1,21 +1,27 @@
-<h2>Log in</h2>
-<div class="centralize-form">
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs ">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<div class="banner-new">
+  <div class="container-form">
+    <div class="form-style">
+      <h3 id="sign-upp">LOG IN</h3>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-card">
+            <div class="form-inputs">
+              <%= f.input :email,
+                  required: false,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" } %>
+              <%= f.input :password,
+                  required: false,
+                  input_html: { autocomplete: "current-password" } %>
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            </div>
+            <%= f.button :submit, "Log in", id: "btn-green" %>
+          <% end  %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in", class: "btn-green" %>
-  </div>
-<% end %>
 </div>
+
+
 
 <% render "devise/shared/links" %>

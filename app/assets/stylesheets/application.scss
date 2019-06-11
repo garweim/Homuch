@@ -13,12 +13,13 @@
 @import "pages/index";
 
 html, body {
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .wrapper {
-  min-height: 100%;
+  min-height: 100vh;
   margin-bottom: -100px;
   padding-bottom: 100px;
 }
 
+body { background-color: #EBF3EC; }
