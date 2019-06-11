@@ -1,4 +1,4 @@
-<div class="banner-new">
+<div class="banner-new-new">
 <% if @estimate && @estimate.errors.any? %>
   <div class="alert alert-warning" style="margin-top:120px" role="alert">
   We could not find an estimate based on our database!
@@ -19,6 +19,7 @@
               <%= f.input :name %>
               <%= f.input :street_and_nr %>
               <%= f.input :state, collection: Project::STATE %>
+              <%= f.input :terrace %>
               <%= f.input :garage %>
               <%= f.input :heating%>
               <%= f.input :electricity %>

@@ -12,38 +12,38 @@
           <% end %>
           >
           </div>
-          <div class="project-details">
-            <div id="edit-btn">
-              <i class="far fa-edit"></i>
+            <div class="project-details">
+              <div id="edit-btn">
+                <i class="far fa-edit"></i>
+              </div>
+              <div id="delete-btn">
+                <i class="far fa-trash-alt"></i>
+              </div>
+              <h4><%= project.name %></h4>
+              <p><%= project.street_and_nr %></p>
+              <div class="pictos-details">
+                <div class="pictos-details-align">
+                  <%= image_tag ("category.png") %>
+                  <p><%=project.category%></p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("surface.png") %>
+                  <p><%=project.surface%> m2</p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("bedroom.png") %>
+                  <p><%=project.nr_of_bedrooms%></p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("bathroom.png") %>
+                  <p><%=project.nr_of_bathrooms%></p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("estimate.png") %>
+                  <p><%= @detailed_estimate %>€</p>
+                </div>
+              </div>
             </div>
-            <div id="delete-btn">
-              <i class="far fa-trash-alt"></i>
-            </div>
-            <h4><%= project.name %></h4>
-            <p><%= project.street_and_nr %></p>
-            <div class="pictos-details">
-              <div class="pictos-details-align">
-                <%= image_tag ("category.png") %>
-                <p><%=project.category%></p>
-              </div>
-              <div class="pictos-details-align">
-                <%= image_tag ("surface.png") %>
-                <p><%=project.surface%> m2</p>
-              </div>
-              <div class="pictos-details-align">
-                <%= image_tag ("bedroom.png") %>
-                <p><%=project.nr_of_bedrooms%></p>
-              </div>
-              <div class="pictos-details-align">
-                <%= image_tag ("bathroom.png") %>
-                <p><%=project.nr_of_bathrooms%></p>
-              </div>
-              <div class="pictos-details-align">
-                <%= image_tag ("estimate.png") %>
-                <p><%= @detailed_estimate %>€</p>
-              </div>
-            </div>
-          </div>
         </div>
         <% end %>
     <% end %>
