@@ -1,0 +1,9 @@
+function updateDOM() {
+  const loanDiv = document.getElementById("loan-calculation");
+  loanDiv.innerHTML = `
+    <p>For a total market price of <%= @estimate.market_price %>
+    you will pay <%= @credit_cost %> over the course of <%= @loan_years %> years </p>
+    `
+}
+
+updateDOM()
