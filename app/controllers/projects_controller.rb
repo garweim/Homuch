@@ -30,9 +30,6 @@ class ProjectsController < ApplicationController
       end
       if @project.errors.none?
         redirect_to project_path(@project) #&& @estimate.errors.none
-      else
-        render :new
-      end
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -62,10 +59,26 @@ class ProjectsController < ApplicationController
     @project.edit
   end
 
+
   def destroy
     @project = Projectt.find(params[:id])
     @project.destroy
   end
+
+  def new_loan
+    @project = Project.find(params[:id])
+    # instead of this controller rendering a view;
+    # it will render a javascript template
+    #  -> new_loan.js.erb
+    @loan_rate = params[:loan_calculation][:rate].to_f
+    @loan_years = params[:loan_calculation][:years].to_i
+    @estimate = @project.estimates.last
+    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years)
+  end
+
+  # def destroy
+  #   @project.destroy
+  # end
 
   private
 

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources 'projects' do
-  resources 'estimates'
+  resources :projects do
+    member do
+      post "new_loan"
+    end
+    resources :estimates
   end
   devise_for :users
   root to: 'pages#home'
