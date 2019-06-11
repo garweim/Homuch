@@ -19,7 +19,7 @@
               <%= f.input :electricity %>
               <%= f.input :kitchen %>
               <%= f.input :sanitation %>
-              <%= f.fields_for :picture do |p| %>
+              <%= f.fields_for :post do |p| %>
                 <%= p.label :photo %><br>
                 <%= p.file_field :photo, :multiple => true, name: "pictures[photo][]" %>
                 <%= p.input :photo_cache, as: :hidden %>
