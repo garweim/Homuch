@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
       @project.estimates.create(
         market_price: @detailed_estimate,
         simple_price: @simple_estimate)
+      end
       if params[:pictures]
         params[:pictures]['photo'].each do |a|
           @picture = @project.pictures.create!(photo: a)
