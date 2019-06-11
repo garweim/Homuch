@@ -1,6 +1,5 @@
 <div class="show-container">
   <div class="container">
-    <h3><%= @project.name.upcase %></h3>
     <div class="row">
       <div class="col-12 col-md-4">
         <p>ASSET DETAILS</p>
@@ -36,12 +35,13 @@
         <% end %>
         <div class="card-search_search">
           <div class="project-details">
-            <div id="edit-btn">
+            <h6><%= @project.name.upcase %></h6>
+            <!-- <div id="edit-btn">
               <i class="far fa-edit"></i>
             </div>
             <div id="delete-btn">
               <i class="far fa-trash-alt"></i>
-            </div>
+            </div> -->
             <div class="pictos-details">
               <div class="pictos-details-align">
                 <%= image_tag ("address.png") %>
@@ -64,11 +64,11 @@
                 <p><%=@project.nr_of_bathrooms%></p>
               </div>
               <div class="pictos-details-align">
-                <%= image_tag ("bathroom.png") %>
+                <%= image_tag ("car.png") %>
                 <p><%=@project.garage%></p>
               </div>
               <div class="pictos-details-align">
-                <%= image_tag ("bathroom.png") %>
+                <%= image_tag ("terrace.png") %>
                 <p><%=@project.terrace%></p>
               </div>
               <!-- <div class="pictos-details-align">
@@ -82,46 +82,62 @@
 
       <div class="col-12 col-md-4">
         <p>ESTIMATE DETAILS</p>
-        <div class="card-search_search">
-          <div class="details-title">
-            <p>Asset Value: </p>
-            <p>Registration Fees: </p>
-            <p>Total price with registration fee: </p>
-            <p>Heating: </p>
-            <p>Electricity: </p>
-            <p>Sanitation: </p>
-            <p>Kitchen: </p>
-            <p>Total Renovation Cost: </p>
+        <div class="card-details-show">
+          <div class="result-estimate">
+            <h4><%= @simple_estimate %>€</h4>
           </div>
-          <div class="details-value">
-            <p><%= @simple_estimate %> € </p>
-            <p><%= (@simple_estimate * 0.15).to_i  %>€</p>
-            <p><%= ((@simple_estimate * 0.15) + @simple_estimate).to_i %> €</p>
-            <% if @project.heating %>
-                <p><%= @renovation_details.heating_price %> €</p>
-              <% else %>
-                <p>0 €</p>
-              <% end %>
+          <div class="card-details-estimate">
+            <p><strong>ASSET VALUE</strong></p>
+            <div class= "card-details-flex">
+              <div class="details-title">
+                <p>Market Value: </p>
+                <p>Registration Fees: </p>
+                <p>Total price with registration fee: </p>
+              </div>
+              <div class="details-value">
+                <p><%= @simple_estimate %> € </p>
+                <p><%= (@simple_estimate * 0.15).to_i  %>€</p>
+                <p><%= ((@simple_estimate * 0.15) + @simple_estimate).to_i %> €</p>
 
-              <% if @project.electricity %>
-                <p><%= @renovation_details.electricity_price %> €</p>
-              <% else %>
-                <p>0 €</p>
-              <% end %>
+              </div>
+            </div>
+            <p><strong>RENOVATION COSTS</strong></p>
+            <div class= "card-details-flex">
+              <div class="details-title">
+                <p>Heating: </p>
+                <p>Electricity: </p>
+                <p>Sanitation: </p>
+                <p>Kitchen: </p>
+                <p>Total Renovation Cost: </p>
+              </div>
+              <div class="details-value">
+                <% if @project.heating %>
+                    <p><%= @renovation_details.heating_price %> €</p>
+                  <% else %>
+                    <p>0 €</p>
+                  <% end %>
 
-              <% if @project.sanitation %>
-                <p><%= @renovation_details.sanitation_price %> €</p>
-              <% else %>
-                <p>0 €</p>
-              <% end %>
+                  <% if @project.electricity %>
+                    <p><%= @renovation_details.electricity_price %> €</p>
+                  <% else %>
+                    <p>0 €</p>
+                  <% end %>
 
-              <% if @project.kitchen %>
-                <p><%= @renovation_details.kitchen_price %> €</p>
-              <% else %>
-                <p>0 €</p>
-              <% end %>
-            <p><%= @renovation_details.total_price  %> €</p>
+                  <% if @project.sanitation %>
+                    <p><%= @renovation_details.sanitation_price %> €</p>
+                  <% else %>
+                    <p>0 €</p>
+                  <% end %>
 
+                  <% if @project.kitchen %>
+                    <p><%= @renovation_details.kitchen_price %> €</p>
+                  <% else %>
+                    <p>0 €</p>
+                  <% end %>
+                <p><%= @renovation_details.total_price  %> €</p>
+
+              </div>
+            </div>
           </div>
 <!--
 

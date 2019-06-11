@@ -20,12 +20,12 @@
 }
 
 .result-estimate {
-  background-color: #095228;
+  background-color: #60BD63;
   padding: 1rem 2rem;
   border-radius: 22px;
   color: white;
   font-weight: bold;
-  width: 33%;
+  width: 60%;
   margin: 0 auto;
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -62,6 +62,12 @@
   text-align: left;
   background-color: white;
   padding: 1rem;
+}
+
+.card-details-flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-search_search p {
