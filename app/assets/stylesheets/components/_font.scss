@@ -33,5 +33,17 @@ h4 {
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+  margin: 0px !important;
   color: #1A1D1A;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#asset-details-title {
+  text-align: center;
+}
+#estimate-details-title {
+  text-align: center;
 }

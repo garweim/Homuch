@@ -11,6 +11,9 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
     perform_simple_estimate
+    # if @simple_estimate == 0
+    #  render :new
+    # end
   end
 
   def create
@@ -20,17 +23,29 @@ class ProjectsController < ApplicationController
       @simple_estimate = perform_simple_estimate
       # we create a estimate for this project
       # save return in estimate table ->
-      @project.estimates.create(
+      @estimate = Estimate.new(
         market_price: @detailed_estimate,
-        simple_price: @simple_estimate)
-      end
-      if params[:pictures]
-        params[:pictures]['photo'].each do |a|
-          @picture = @project.pictures.create!(photo: a)
+        simple_price: @simple_estimate,
+        project: @project
+      )
+      if @project.save && @estimate.save
+        # @project.estimates.create(
+        #   market_price: @detailed_estimate,
+        #   simple_price: @simple_estimate)
+        if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
         end
-      end
-    if @project.errors.none?
-      redirect_to project_path(@project) #&& @estimate.errors.none
+        redirect_to project_path(@project) #&& @estimate.errors.none
+
+      else
+        # we need to remove the project from the DB
+        # we can still use the @project in the form in the new page
+        # but the record gets destroyed, so we dont recreate it upon second save
+        @project.destroy
+        render :new
+      end     
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -69,7 +84,8 @@ class ProjectsController < ApplicationController
     @loan_rate = params[:loan_calculation][:rate].to_f
     @loan_years = params[:loan_calculation][:years].to_i
     @estimate = @project.estimates.last
-    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years)
+    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years).round(1)
+    #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
   end
 
   private
@@ -126,7 +142,8 @@ class ProjectsController < ApplicationController
     projects.map do |project|
       {
         lat: project.latitude,
-        lng: project.longitude
+        lng: project.longitude,
+        infoWindow: render_to_string(partial: "/projects/map_box", locals: { project: project })
       }
     end
   end
