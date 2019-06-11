@@ -3,9 +3,9 @@ import mapboxgl from 'mapbox-gl';
 
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
-  const markers = JSON.parse(mapElement.dataset.markers)
 
   if (mapElement) {
+    const markers = JSON.parse(mapElement.dataset.markers)
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
@@ -13,8 +13,10 @@ const initMapbox = () => {
     });
 
     markers.forEach((marker) => {
+      const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
       new mapboxgl.Marker()
         .setLngLat([ marker.lng, marker.lat ])
+        .setPopup(popup) // add this
         .addTo(map);
     });
     const bounds = new mapboxgl.LngLatBounds();

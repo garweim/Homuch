@@ -20,16 +20,19 @@ class ProjectsController < ApplicationController
       @simple_estimate = perform_simple_estimate
       # we create a estimate for this project
       # save return in estimate table ->
-      @project.estimates.create(
-        market_price: @detailed_estimate,
-        simple_price: @simple_estimate)
-      if params[:pictures]
-        params[:pictures]['photo'].each do |a|
-          @picture = @project.pictures.create!(photo: a)
+      if @project.save
+        @project.estimates.create(
+          market_price: @detailed_estimate,
+          simple_price: @simple_estimate)
+        if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
         end
-      end
-      if @project.errors.none?
         redirect_to project_path(@project) #&& @estimate.errors.none
+      else
+        render :new
+      end
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -135,7 +138,8 @@ class ProjectsController < ApplicationController
     @markers = @projects.map do |project|
       {
         lat: project.latitude,
-        lng: project.longitude
+        lng: project.longitude,
+        infoWindow: render_to_string(partial: "/projects/map_box", locals: { project: project })
       }
     end
   end

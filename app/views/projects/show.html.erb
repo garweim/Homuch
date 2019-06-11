@@ -21,9 +21,9 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <%= cl_image_tag @project.pictures[0].photo, alt: "Picture", class: "d-block w-100", height: 15, width: 20, crop: :lfill%>
+            <%= cl_image_tag @project.pictures[0].photo, alt: "Picture", class: "d-block w-100", height: 300, width: 400, crop: :lfill%>
           </div>
-          <%  @project.pictures.each do |pic| %>
+          <%  @project.pictures[1..-1].each do |pic| %>
             <div class="carousel-item">
               <%= cl_image_tag pic.photo, alt: "Picture", class: "d-block w-100", height: 300, width: 400, crop: :lfill%>
             </div>
