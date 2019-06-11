@@ -53,6 +53,14 @@ class ProjectsController < ApplicationController
     @renovation_details = ::RenovationCalculator.new(@project)
     map_single_project
     @pictures = @project.pictures
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@project.name}",
+        template: "projects/show.html.erb",
+        layout: "pdf.html"
+      end
+    end
   end
 
   def update

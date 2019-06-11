@@ -37,13 +37,13 @@
             <p><strong><%= "Sanitation Coast: #{@renovation_details.sanitation_price} " if @project.sanitation %> € </strong> </p>
             <p><strong><%= "Electricity Coast: #{@renovation_details.electricity_price} " if @project.electricity %> €</strong> </p>
             <h4>Total Renovation Coast</h4>
-            <p> <strong><%= @renovation_details.total_price  %> € </strong></p> 
+            <p> <strong><%= @renovation_details.total_price  %> € </strong></p>
             <%  @project.pictures.each do |pic| %>
               <% puts "bla3" %>
               <%= cl_image_tag pic.photo, height: 300, width: 400, crop: :fill %>
             <% end %>
-
           </div>
+              <%= link_to 'Download your estimate on PDF format', project_path(@project, format: :pdf) %>
           <br>
 
           <%# if session[:surface]  %>
