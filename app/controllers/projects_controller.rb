@@ -17,15 +17,13 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    # check if user signed in
     if current_user
       create_project
-      # call estimate service
       @detailed_estimate = perform_detailed_estimate
       @simple_estimate = perform_simple_estimate
-
       # we create a estimate for this project
       # save return in estimate table ->
+
       @estimate = Estimate.new(
         market_price: @detailed_estimate,
         simple_price: @simple_estimate,
@@ -44,6 +42,18 @@ class ProjectsController < ApplicationController
       # then we redirect
       if @project.errors.none? && @estimate.save
         redirect_to project_path(@project)
+
+      if @project.save
+        @project.estimates.create(
+          market_price: @detailed_estimate,
+          simple_price: @simple_estimate)
+        if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
+        end
+        redirect_to project_path(@project) #&& @estimate.errors.none
+>>>>>>> master
       else
         # we need to remove the project from the DB
         # we can still use the @project in the form in the new page
@@ -51,10 +61,13 @@ class ProjectsController < ApplicationController
         @project.destroy
         render :new
       end
+<<<<<<< HEAD
 
       #render :new if @simple_estimate == 0
 
 
+=======
+>>>>>>> master
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -73,14 +86,21 @@ class ProjectsController < ApplicationController
       format.html
       format.pdf do
         render pdf: "#{@project.name}",
-        template: "projects/show.html.erb",
-        layout: "pdf.html"
+          template: "projects/show.html.erb",
+          layout: "pdf.html"
       end
     end
   end
 
-  def update
-    @project.update(projects_params)
+  def edit
+    @project = Project.find(params[:id])
+    @project.edit
+  end
+
+
+  def destroy
+    @project = Projectt.find(params[:id])
+    @project.destroy
   end
 
   def new_loan
@@ -91,7 +111,8 @@ class ProjectsController < ApplicationController
     @loan_rate = params[:loan_calculation][:rate].to_f
     @loan_years = params[:loan_calculation][:years].to_i
     @estimate = @project.estimates.last
-    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years)
+    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years).round(1)
+    #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
   end
 
   # def destroy
@@ -152,7 +173,8 @@ class ProjectsController < ApplicationController
     @markers = @projects.map do |project|
       {
         lat: project.latitude,
-        lng: project.longitude
+        lng: project.longitude,
+        infoWindow: render_to_string(partial: "/projects/map_box", locals: { project: project })
       }
     end
   end

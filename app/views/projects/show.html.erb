@@ -21,9 +21,9 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <%= cl_image_tag @project.pictures[0].photo, alt: "Picture", class: "d-block w-100", height: 15, width: 20, crop: :lfill%>
+            <%= cl_image_tag @project.pictures[0].photo, alt: "Picture", class: "d-block w-100", height: 300, width: 400, crop: :lfill%>
           </div>
-          <%  @project.pictures.each do |pic| %>
+          <%  @project.pictures[1..-1].each do |pic| %>
             <div class="carousel-item">
               <%= cl_image_tag pic.photo, alt: "Picture", class: "d-block w-100", height: 300, width: 400, crop: :lfill%>
             </div>
@@ -128,10 +128,20 @@
   <%= simple_form_for :loan_calculation, url: new_loan_project_path(@project), remote: true do |f| %>
     <%= f.input :rate, collection: [0.01,0.02,0.03,0.04,0.05] %>
     <%= f.input :years, collection: [5,10,15,20,25] %>
-    <%= f.submit "Calculate loan 🤡", class: "btn btn-primary"  %>
+    <%= f.submit "Calculate loan cost", class: "btn btn-primary"  %>
   <% end %>
   <div id="loan-calculation"></div>
 </div>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
 
 
 
