@@ -5,8 +5,8 @@ class Scraper
   attr_reader :project, :html_doc, :attributes
   attr_writer :attributes
   ZIPCODE = [1000, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1210]
-  #PAGES = ["", ",2", ",3", ",4", ",5", ",6", ",7", ",8"]
-  #ZIPCODE = [1000, 1020, 1030]
+    # PAGES = ["", ",2", ",3", ",4", ",5", ",6", ",7", ",8"]
+    # ZIPCODE = [1000, 1020, 1030]
   PAGES = ["", ",2", ",3"]
 
   def call(zipcode, type)
@@ -106,9 +106,6 @@ class Scraper
 
   # def parse_projects_data
   # end
-
-
-
   # def min_surface
   #   if project.surface
   #     project.surface - 10
@@ -174,8 +171,6 @@ end
 
 #   zipcode:
 #     itemprop="postalCode"
-
-
 #####################
 
 ### REQUIRED OUTPUT ####
@@ -191,8 +186,6 @@ end
 # ]
 
 ########################
-
-
 # html_doc.search('.result-xl').each do |element|
 #   element.search('.rangePrice') do |price|
 #     puts price.text.strip
