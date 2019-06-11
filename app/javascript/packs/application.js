@@ -14,6 +14,9 @@ import { initMapbox } from '../components/init_map';
 
 initMapbox();
 
+import { initAutocomplete } from '../components/init_autocomplete';
+
+initAutocomplete();
 
 
 

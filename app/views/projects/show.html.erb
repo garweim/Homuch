@@ -198,7 +198,7 @@
           <%= simple_form_for :loan_calculation, url: new_loan_project_path(@project), remote: true do |f| %>
             <%= f.input :rate, collection: [0.01,0.02,0.03,0.04,0.05] %>
             <%= f.input :years, collection: [5,10,15,20,25] %>
-            <%= f.submit "Calculate Loan", class: "btn-green"  %>
+            <%= f.submit "Calculate Loan", id: "btn-green"  %>
           <% end %>
           <div id="loan-calculation"></div>
         </div>

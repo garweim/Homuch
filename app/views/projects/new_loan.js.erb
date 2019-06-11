@@ -1,9 +1,8 @@
 function updateDOM() {
   const loanDiv = document.getElementById("loan-calculation");
   loanDiv.innerHTML = `
-    <p>For a total market price of <%= @estimate.market_price %>
-    you will pay <%= @credit_cost %> over the course of <%= @loan_years %> years </p>
-    `
+    <p>For a total market price of <%= @estimate.market_price %>€
+    you will pay <%= @credit_cost %>€ over the course of <%= @loan_years %> years. It means a monthly payment of <%= ((@estimate.market_price + @credit_cost) / (@loan_years * 12)).round(1) %>€.</p>   `
 }
 
 updateDOM()
