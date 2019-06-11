@@ -26,7 +26,6 @@ class ProjectsController < ApplicationController
       @project.estimates.create(
         market_price: @detailed_estimate,
         simple_price: @simple_estimate)
-
       # @estimate = @project.estimates.create(estimate_params
       # check if project is created
 
@@ -35,7 +34,6 @@ class ProjectsController < ApplicationController
             @picture = @project.pictures.create!(photo: a)
           end
         end
-
       if @project.errors.none?
         redirect_to project_path(@project) #&& @estimate.errors.none
       else
@@ -56,12 +54,19 @@ class ProjectsController < ApplicationController
     @renovation_details = ::RenovationCalculator.new(@project)
     map_single_project
     @pictures = @project.pictures
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@project.name}",
+        template: "projects/show.html.erb",
+        layout: "pdf.html"
+      end
+    end
   end
 
   def update
     @project.update(projects_params)
   end
-
 
   def new_loan
     @project = Project.find(params[:id])

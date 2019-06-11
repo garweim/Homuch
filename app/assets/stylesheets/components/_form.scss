@@ -3,14 +3,21 @@
 }
 
 .form-style {
-    position: relative;
-    width: 100%;
+    width: 45%;
     background-color: white;
     box-shadow: 0px 1px 3px #7B7676;
     padding: 30px 50px 30px 50px;
     /* margin: 6rem 0rem 3rem 0rem; */
     border-radius: 22px;
-    top: -17rem;
+}
+
+.form-style h3 {
+  text-align: center;
+}
+
+#form-simple-estimate {
+  position: relative;
+  top: -37rem;
 }
 
 .label {
@@ -18,14 +25,24 @@
   display: block;
 }
 
-.centralize-form {
-  text-align: center;
-  width: 30%;
-  margin-right: auto;
-  margin-left: auto;
-  box-shadow: 1px 1px 2px #50692a40 ;
-  padding: 30px;
-  margin-top: 50px;
-  margin-bottom: 20px;
+// .centralize-form {
+//   text-align: center;
+//   width: 30%;
+//   margin-right: auto;
+//   margin-left: auto;
+//   box-shadow: 1px 1px 2px #50692a40 ;
+//   padding: 30px;
+//   margin-top: 50px;
+//   margin-bottom: 20px;
+// }
+
+#form-login {
+ position: relative;
+ top: -33rem;
+}
+
+#form-signup {
+  position: relative;
+  top: -39rem;
 }
 

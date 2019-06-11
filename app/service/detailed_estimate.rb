@@ -1,7 +1,7 @@
 class DetailedEstimate
   def call(project)
     @project = project
-    return unless market_price_estimate
+      return unless market_price_estimate
     total_estimate
   end
 
@@ -10,7 +10,7 @@ class DetailedEstimate
   attr_reader :project
 
   def total_estimate
-    (market_price_estimate + registration_fees) - renovation_price
+    (market_price_estimate) - renovation_price
   end
 
   def registration_fees
