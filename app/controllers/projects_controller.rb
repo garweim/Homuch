@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :new_loan]
-  skip_before_action :authenticate_user!, only: [:index, :new, :create]
+  skip_before_action :authenticate_user!, only: [:new, :create]
 
   def index
     # @projects = Project.all
@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
         # but the record gets destroyed, so we dont recreate it upon second save
         @project.destroy
         render :new
-      end     
+      end
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -70,11 +70,19 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project.edit
+  end
+
+  def update
+    if @project.update(projects_params)
+      redirect_to project_path
+    else
+      render :edit
+    end
   end
 
   def destroy
     @project.destroy
+    redirect_to projects_path
   end
 
   def new_loan
