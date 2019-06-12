@@ -21,17 +21,14 @@ class ProjectsController < ApplicationController
       create_project
       @detailed_estimate = perform_detailed_estimate
       @simple_estimate = perform_simple_estimate
-      # we create a estimate for this project
-      # save return in estimate table ->
+
       @estimate = Estimate.new(
         market_price: @detailed_estimate,
         simple_price: @simple_estimate,
         project: @project
       )
       if @project.save && @estimate.save
-        # @project.estimates.create(
-        #   market_price: @detailed_estimate,
-        #   simple_price: @simple_estimate)
+
         if params[:pictures]
           params[:pictures]['photo'].each do |a|
             @picture = @project.pictures.create!(photo: a)
@@ -40,12 +37,10 @@ class ProjectsController < ApplicationController
         redirect_to project_path(@project) #&& @estimate.errors.none
 
       else
-        # we need to remove the project from the DB
-        # we can still use the @project in the form in the new page
-        # but the record gets destroyed, so we dont recreate it upon second save
+
         @project.destroy
         render :new
-      end     
+      end
     else
       save_project_data_in_session
       perform_simple_estimate
@@ -78,9 +73,6 @@ class ProjectsController < ApplicationController
   end
 
   def new_loan
-    # instead of this controller rendering a view;
-    # it will render a javascript template
-    #  -> new_loan.js.erb
     @loan_rate = params[:loan_calculation][:rate].to_f
     @loan_years = params[:loan_calculation][:years].to_i
     @estimate = @project.estimates.last
