@@ -83,7 +83,7 @@
         <p id="estimate-details-title">ESTIMATE DETAILS</p>
         <div class="card-details-show">
           <div class="result-estimate">
-            <h4><%= @simple_estimate %>€</h4>
+            <h4><%= @detailed_estimate %>€</h4>
           </div>
           <div class="card-details-estimate">
             <p><strong>ASSET VALUE</strong></p>
@@ -94,9 +94,9 @@
                 <p>Total price with registration fee: </p>
               </div>
               <div class="details-value">
-                <p><%= @simple_estimate %> € </p>
-                <p><%= (@simple_estimate * 0.15).to_i  %>€</p>
-                <p><%= ((@simple_estimate * 0.15) + @simple_estimate).to_i %> €</p>
+                <p><%= @detailed_estimate %> € </p>
+                <p><%= (@detailed_estimate * 0.15).to_i  %>€</p>
+                <p><%= ((@detailed_estimate * 0.15) + @detailed_estimate).to_i %> €</p>
               </div>
             </div>
             <p><strong>RENOVATION COSTS</strong></p>
