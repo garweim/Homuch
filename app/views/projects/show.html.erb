@@ -87,7 +87,7 @@
                 <h4><%= @detailed_estimate %>€</h4>
               </div>
               <div class="card-details-estimate">
-                <button id="flipButton">flip me to calculate ROI!</button>
+               <!--  <button id="flipButton">flip me to calculate ROI!</button> -->
                 <div class= "card-details-flex">
                   <div class="details-title">
                     <h5><strong>TOTAL ASSET PRICE</strong></h5>
@@ -138,14 +138,21 @@
                   </div>
                   <div class="details-value">
                     <h5><strong><%= ((@detailed_estimate * 0.15) + @detailed_estimate).to_i + @renovation_details.total_price%> €</strong></h5>
+                    <button id="flipButton">Calculate ROI</button>
                   </div>
                 </div>
               </div>
             </div>
             <div class="flip-card-back">
-              I am the ROI 😎📈
-              <p><%= @roi_estimate.round(2)*100 %> %</p>
-              <!-- add button to click back to estimate -->
+              <div class="flip-card-front">
+                <h6> YOUR RETURN ON INVESTMENT ESTIMATE IS A RATE OF <%=@roi_estimate.round(2)*100 %>% </h6>
+                    <p id="estimate-details-title">CHOOSE ROI RATE TO CALCULATE YOUR INVESTMENT</p>
+                        <%= simple_form_for :investment_calculation, url: investment_project_project_path(@project), remote: true do |f| %>
+                          <%= f.input :rate, collection: ["3%","4%","5%","6%","7%","8%","9%","10%"] %>
+                          <%= f.submit "Calculate Investment", id: "btn-green"  %>
+                        <% end %>
+                    <div id="investment_calculation"></div>
+                </div>
             </div>
           </div>
         </div>

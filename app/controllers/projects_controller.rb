@@ -104,6 +104,14 @@ class ProjectsController < ApplicationController
     #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
   end
 
+  def investment
+    # @investment = params[:investment_calculation][:project]
+    @investment = params[:investment_calculation][:desired_roi].to_f
+    @estimate_investment = @project.estimates.last
+    @total_investment = @estimate_investment.total_investment(@project, @desired_roi).round(1)
+    #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
+  end
+
   private
 
   def projects_params

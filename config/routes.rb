@@ -3,6 +3,11 @@ Rails.application.routes.draw do
     member do
       post "new_loan"
     end
+  resources :projects do
+    member do
+      post "investment"
+    end
+  end
     resources :estimates
   end
   devise_for :users
