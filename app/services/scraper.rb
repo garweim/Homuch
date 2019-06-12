@@ -26,13 +26,16 @@ class Scraper
   end
 
   def self.scrape(type)
+    puts "launch scraper"
     if type == "sale"
       ZIPCODE.each do |zip|
         Scraper.new.call(zip, type)
+        puts "scraped zipcode #{zip}"
       end
     elsif type == "rent"
       ZIPCODE.each do |zip|
         Scraper.new.call(zip, type)
+        puts "scraped zipcode #{zip}"
       end
     end
   end
