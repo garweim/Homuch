@@ -14,10 +14,15 @@
           </div>
             <div class="project-details">
               <div id="edit-btn">
-                <i class="far fa-edit"></i>
+                <%= link_to edit_project_path(project) do  %>
+                  <i class="far fa-edit"></i>
+                <% end %>
               </div>
               <div id="delete-btn">
-                <i class="far fa-trash-alt"></i>
+               <!--  <i class="far fa-trash-alt"></i> -->
+               <%= link_to project_path(project), method: :delete do  %>
+               <i class="fas fa-trash-alt"></i>
+               <% end %>
               </div>
               <h4><%= project.name %></h4>
               <p><%= project.street_and_nr %></p>
