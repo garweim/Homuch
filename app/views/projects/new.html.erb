@@ -10,21 +10,39 @@
       <%= simple_form_for(@project) do |f| %>
         <div class="form-card">
           <div class="form-inputs">
+            <%= f.input :category, collection: ["Apartment", "House", "Villa", "Apartment Building"] %>
             <%= f.input :zipcode, as: :string %>
-            <%= f.input :surface %>
-            <%= f.input :nr_of_bedrooms %>
-            <%= f.input :nr_of_bathrooms %>
-            <%= f.input :category, collection: ["apartment", "house"] %>
             <% if current_user %>
-              <%= f.input :name %>
-              <%= f.input :street_and_nr %>
-              <%= f.input :state, collection: Project::STATE %>
-              <%= f.input :terrace %>
-              <%= f.input :garage %>
-              <%= f.input :heating%>
-              <%= f.input :electricity %>
-              <%= f.input :kitchen %>
-              <%= f.input :sanitation %>
+              <%= f.input :street_and_nr, label: 'Address' %>
+            <% end %>
+            <div class="input-short-flex">
+              <div>
+                <%= f.input :surface %>
+                <%= f.input :nr_of_bedrooms, label: 'Number of bedrooms' %>
+              </div>
+              <div>
+                <%= f.input :nr_of_bathrooms, label: 'Number of bathrooms' %>
+                <% if current_user %>
+                  <%= f.input :garage, label: 'Number of garages' %>
+                <% end %>
+              </div>
+            </div>
+            <% if current_user %>
+              <%#= f.input :terrace, label: 'Terrace' %>
+              <%= f.input :name, label: 'Description' %>
+              <%= f.input :state, label: "General state of the building", collection: Project::STATE %>
+              <p id='renovation-title-form'><strong>Do any of the following need some renovation?</strong></p>
+              <br>
+              <div class="input-checkbox-flex">
+                <div>
+                  <%= f.input :heating, input_html: { class: "input-form-style" } %>
+                  <%= f.input :electricity, input_html: { class: "input-form-style" } %>
+                </div>
+                <div>
+                  <%= f.input :kitchen, input_html: { class: "input-form-style" } %>
+                  <%= f.input :sanitation, input_html: { class: "input-form-style" } %>
+                </div>
+              </div>
               <%= f.fields_for :picture do |p| %>
                 <%= p.label :photo %><br>
                 <%= p.file_field :photo, :multiple => true, name: "pictures[photo][]" %>

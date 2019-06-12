@@ -20,21 +20,40 @@
   top: -37rem;
 }
 
-.label {
-  font-family: sans-serif;
-  display: block;
+#renovation-title-form {
+margin-bottom: 1rem;
 }
 
-// .centralize-form {
-//   text-align: center;
-//   width: 30%;
-//   margin-right: auto;
-//   margin-left: auto;
-//   box-shadow: 1px 1px 2px #50692a40 ;
-//   padding: 30px;
-//   margin-top: 50px;
-//   margin-bottom: 20px;
-// }
+.simple_form label {
+  font-family: sans-serif;
+  display: block;
+  font-weight: bold;
+  color: #1A1D1A;
+}
+
+.simple_form input {
+  font-family: sans-serif;
+  display: block;
+  font-weight: normal;
+  // border-color: #60bd63;
+  color: #808080;
+  border-radius: 4px;
+}
+
+#input-form-style {
+  font-weight: normal;
+}
+
+.input-checkbox-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.input-short-flex {
+  display: flex;
+  justify-content: space-between;
+}
 
 #form-login {
  position: relative;
