@@ -3,7 +3,9 @@
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
+ <div class="banner-new">
+  <div class="container-form">
+    <div class="form-style">
     <%= f.input :email, required: true, autofocus: true %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -21,15 +23,19 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
-  </div>
+
+<!--     <%#= f.label "insert avatar"%> -->
+
+    <%= f.file_field :avatar, label: 'insert avatar' %>
+    <%= f.input :avatar_cache, as: :hidden %>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "Update", id: "btn-green" %>
   </div>
-<% end %>
 
-<h3>Cancel my account</h3>
+  </div>
+  </div>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  <% end %>
 
-<%= link_to "Back", :back %>
+</div>

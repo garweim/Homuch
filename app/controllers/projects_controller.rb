@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :new_loan]
-  skip_before_action :authenticate_user!, only: [:index, :new, :create]
+  skip_before_action :authenticate_user!, only: [:new, :create]
 
   def index
     # @projects = Project.all
@@ -71,11 +71,24 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project.edit
+  end
+
+  def update
+    if @project.update(projects_params)
+      if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
+      end
+      redirect_to project_path
+    else
+      render :edit
+    end
   end
 
   def destroy
     @project.destroy
+    redirect_to projects_path
   end
 
   def new_loan
