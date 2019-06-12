@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new(session_projects_params) #Prefill based on session info
-    perform_simple_estimate
+    # perform_simple_estimate
     # if @simple_estimate == 0
     #  render :new
     # end
@@ -45,10 +45,10 @@ class ProjectsController < ApplicationController
         # but the record gets destroyed, so we dont recreate it upon second save
         @project.destroy
         render :new
-      end     
+      end
     else
       save_project_data_in_session
-      perform_simple_estimate
+      @simple_estimate = perform_simple_estimate
       render 'projects/simple_estimate'
     end
   end
