@@ -57,6 +57,7 @@ class ProjectsController < ApplicationController
     @simple_estimate = perform_simple_estimate
     @detailed_estimate = perform_detailed_estimate
     @renovation_details = ::RenovationCalculator.new(@project)
+    @roi_estimate = ::RoiCalculation.new.call(@project)
     # @last_estimate = @project.estimates.last
     @markers = map_single_project
     @pictures = @project.pictures
