@@ -123,6 +123,7 @@ class ProjectsController < ApplicationController
   end
 
   def create_project
+    raise
     @project = Project.create(projects_params.merge(user: current_user))
   end
 
