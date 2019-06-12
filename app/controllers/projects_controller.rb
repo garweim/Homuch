@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
     # @projects = Project.all
     @projects = Project.where.not(latitude: nil, longitude: nil)
     @markers = map_all_projects(@projects)
+    # @detailed_estimate = perform_detailed_estimate
   end
 
   def new

@@ -18,8 +18,9 @@ class Project < ApplicationRecord
 
   # after_create :build_estimate
 
-  private
-
+  def short_address
+    street_and_nr.split(",").first
+  end
   # def build_estimate
 
   #   #do stuff create estimate
