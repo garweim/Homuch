@@ -58,6 +58,7 @@ class ProjectsController < ApplicationController
     @simple_estimate = perform_simple_estimate
     @detailed_estimate = perform_detailed_estimate
     @renovation_details = ::RenovationCalculator.new(@project)
+    # @last_estimate = @project.estimates.last
     @markers = map_single_project
     @pictures = @project.pictures
     respond_to do |format|

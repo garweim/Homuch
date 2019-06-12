@@ -19,9 +19,11 @@
                   required: true,
                   hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" }, class: "label" %>
+
       <%= f.input :password_confirmation,
                   required: true,
                   input_html: { autocomplete: "new-password" }, class: "label" %>
+
             </div>
             <%= f.button :submit, "Sign up", id: "btn-green" %>
           <% end  %>
