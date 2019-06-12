@@ -10,6 +10,13 @@
   width: 100%;
   height: 100%;
   margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+.simple-estimate-container {
+  width: 100%;
+  height: 100%;
+  margin-top: 80px;
 }
 
 .card-details-show {
@@ -17,12 +24,19 @@
   margin: 0 auto;
   text-align: left;
   background-color: white;
-  padding: 1rem;
+  padding: 1.5rem;
+  height: 26.2rem;
+  border-radius: 8px;
 }
 
 .card-details-show p {
-  font-size: 12px;
+  font-size: 14px;
   color: #1A1D1A;
+}
+
+.card-details-show h6 {
+  text-align: center;
+  color: #60bd63;
 }
 
 .card-details-show h4 {
@@ -79,20 +93,35 @@
   background-position: center;
 }
 
+.card-asset-details {
+  height: 26.2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+
+}
+
 .project-details {
   width: 100%;
   height: 100%;
   position: relative;
+  padding: 1.5rem;
 }
 
 .project-details p {
-  font-size: 10px;
+  font-size: 14px;
+}
+
+.project-details h6 {
+  text-align: center;
 }
 
 .pictos-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 12px;
+  grid-gap: 5px;
 }
 
 .pictos-details-align{

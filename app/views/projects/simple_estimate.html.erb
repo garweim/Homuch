@@ -1,36 +1,45 @@
-<!-- <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="container-form">
-<h1 style="color: black">Your estimate</h1>
-<h2 style="color: black"><%= @simple_estimate %></h2>
-</div> -->
 
-<div class="category-card">
-          <div class="card-search">
-            <h5>Details of your search</h5>
-            <p><strong>Type of asset:</strong> <%= session[:category]%></p>
-            <p><strong>Address:</strong> <%= session[:zipcode]%></p>
-            <p><strong>Surface:</strong> <%= session[:surface]%> sqm</p>
-            <p><strong>Nr. of bedrooms:</strong> <%= session[:nr_of_bedrooms] %></p>
-            <p><strong>Nr. of bathrooms:</strong> <%= session[:nr_of_bathrooms]%></p>
-          </div>
-          <br>
-          <div class="container-estimate-text">
-            <p style="color:#095228"><strong>Your estimate:</strong></p>
-          </div>
-          <div class="result-estimate">
-            <h4><%= @simple_estimate %>€</h4>
-          </div>
-          <div class="container-estimate-text">
-            <br>
-            <p style="color:#095228" ><strong>Want a more detailed estimate?</strong></p>
-            <p>Please <strong><%= link_to "create an account",  new_user_registration_path %></strong> or <strong><%= link_to "log in", new_user_session_path %></strong> to proceed to the detailed estimate and enjoy multiple additionnal features.</p>
-          </div>
+<div class="simple-estimate-container">
+  <div class="banner-new">
+    <!-- <div></div> -->
+      <div class="container-simple-result">
+        <div class="container-estimate-text">
+          <h6><strong>YOUR ESTIMATE:</strong></h6>
         </div>
+        <div class="result-estimate">
+          <h4><%= @simple_estimate %>€</h4>
+        </div>
+             <div class="card-search_search">
+            <div class="project-details">
+              <div class="pictos-details">
+                <div class="pictos-details-align">
+                  <%= image_tag ("address.png") %>
+                  <p><%= session[:zipcode]%></p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("category.png") %>
+                  <p><%= session[:category]%></p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("surface.png") %>
+                  <p><%= session[:surface]%> m2</p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("bedroom.png") %>
+                  <p><%= session[:nr_of_bedrooms] %></p>
+                </div>
+                <div class="pictos-details-align">
+                  <%= image_tag ("bathroom.png") %>
+                  <p><%= session[:nr_of_bathrooms]%></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="container-estimate-text">
+          <br>
+          <p style="color:#095228" ><strong>Want a more detailed estimate?</strong></p>
+          <p>Please <strong><%= link_to "create an account",  new_user_registration_path %></strong> or <strong><%= link_to "log in", new_user_session_path %></strong> to proceed to the detailed estimate and enjoy multiple additionnal features.</p>
+        </div>
+      </div>
+  </div>
+</div>

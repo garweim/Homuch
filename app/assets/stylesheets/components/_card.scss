@@ -35,6 +35,7 @@
   color: white;
   font-weight: bold;
   margin-bottom: 0rem;
+  text-align: center;
 }
 
 .card-search {
@@ -57,11 +58,9 @@
   display: flex;
   justify-content: space-between;
   border-radius: 1px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   text-align: left;
   background-color: white;
-  padding: 1rem;
 }
 
 .card-details-flex {
@@ -87,10 +86,21 @@
 }
 
 .container-estimate-text {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
+  text-align: center;
 }
 
 #exampleModalLabel {
   text-align: center;
 }
+
+.container-simple-result {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 1.5rem;
+  height: 26.2rem;
+  border-radius: 8px;
+  }
