@@ -24,6 +24,13 @@ class ApplicationController < ActionController::Base
       !request.xhr?) # don't store ajax calls
     store_location_for(:user, request.fullpath)
   end
+
+# app/controllers/application_controller.rb
+
+  def default_url_options
+    { host: ENV["DOMAIN"] || "localhost:3000" }
+  end
+
   end
   # def after_sign_in_path_for(resource)
   # request.env['omniauth.origin'] || stored_location_for(resource) || root_url
