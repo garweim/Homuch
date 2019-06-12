@@ -74,6 +74,11 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(projects_params)
+      if params[:pictures]
+          params[:pictures]['photo'].each do |a|
+            @picture = @project.pictures.create!(photo: a)
+          end
+      end
       redirect_to project_path
     else
       render :edit
