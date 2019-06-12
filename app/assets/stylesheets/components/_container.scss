@@ -14,7 +14,7 @@
 }
 
 .carousel-inner {
-  max-height: 12rem !important;
+  max-height: 15rem !important;
 }
 
 .container-steps {
@@ -146,4 +146,8 @@
   border-radius: 15px;
   margin-right: 6rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container-show-cards {
+  margin-top: 20px;
 }

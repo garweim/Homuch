@@ -40,7 +40,7 @@
                 </div>
                 <div class="pictos-details-align">
                   <%= image_tag ("estimate.png") %>
-                  <p><%= @detailed_estimate %>€</p>
+                  <p><%= project.estimates.last&.market_price %>€</p>
                 </div>
               </div>
             </div>
