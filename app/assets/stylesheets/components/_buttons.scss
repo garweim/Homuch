@@ -40,11 +40,23 @@
   top: 1.3rem;
   right: 1rem;
   font-size: 13px;
-  color: #878787;
+  color: #20BC62 !important;
 }
 
-#edit-btn:hover {
-  color: black;
+.far {
+  color: #20BC62 !important;
+}
+
+.fas {
+  color: #20BC62 !important;
+}
+
+.far:hover {
+  color: #80d483 !important;
+}
+
+.fas:hover {
+  color: #80d483 !important;
 }
 
 #delete-btn {
@@ -53,8 +65,4 @@
   right: 2.5rem;
   font-size: 13px;
   color: #878787;
-}
-
-#delete-btn:hover {
-  color: black;
 }
