@@ -26,13 +26,16 @@ class Scraper
   end
 
   def self.scrape(type)
+    puts "launch scraper"
     if type == "sale"
       ZIPCODE.each do |zip|
         Scraper.new.call(zip, type)
+        puts "scraped zipcode #{zip}"
       end
     elsif type == "rent"
       ZIPCODE.each do |zip|
         Scraper.new.call(zip, type)
+        puts "scraped zipcode #{zip}"
       end
     end
   end
@@ -103,91 +106,4 @@ class Scraper
 
     nil
   end
-
-  # def parse_projects_data
-  # end
-  # def min_surface
-  #   if project.surface
-  #     project.surface - 10
-  #   else
-  #     100
-  #   end
-  # end
-
-  # def max_surface
-  #   if project.surface.present?
-  #     project.surface + 10
-  #   else
-  #     150
-  #   end
-  # end
-
-  # def min_bedrooms
-  #   if project.nr_of_bedrooms.present? && project.nr_of_bedrooms > 1
-  #     project.nr_of_bedrooms - 1
-  #   else
-  #     1
-  #   end
-  # end
-
-  # def max_bedrooms
-  #   if project.nr_of_bedrooms.present?
-  #     project.nr_of_bedrooms + 1
-  #   else
-  #     1
-  #   end
-  # end
-
-  # def bathrooms
-  #   if project.nr_of_bathrooms.present?
-  #     project.nr_of_bathrooms
-  #   else
-  #     1
-  #   end
-  # end
-
 end
-### SCRAPING INFO ###
-
-# An appartement card has:
-#   class="card"
-#   itemtype="https://schema.org/Apartment"
-
-# Each appartment card has:
-#   Price:
-#     class="list-item-price"
-
-#   Surface:
-#     title="Livable surface"
-
-#   Bedroom:
-#     title="Bedroom(s)"
-
-#   Surface:
-#     title="Livable surface"
-
-#   Bathroom:
-#     title="Bathroom(s)"
-
-#   zipcode:
-#     itemprop="postalCode"
-#####################
-
-### REQUIRED OUTPUT ####
-
-# [
-#   {
-#     zipcode: 1000,
-#     surface: 67,
-#     nr_of_bedrooms: 3,
-#     nr_of_bathrooms: 1,
-#     price: 200_000
-#   }
-# ]
-
-########################
-# html_doc.search('.result-xl').each do |element|
-#   element.search('.rangePrice') do |price|
-#     puts price.text.strip
-#   end
-# end
