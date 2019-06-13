@@ -27,7 +27,11 @@ class RoiInvestmentCalculator
     price_per_sqm = filtered_array.map do |house|
       house.price / house.surface
     end
-    (price_per_sqm.sum / filtered_array.count) * @project.surface
+    if filtered_array.count != 0
+      (price_per_sqm.sum / filtered_array.count) * @project.surface
+    else
+      1
+    end
   end
 
   def renovation_price
