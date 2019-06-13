@@ -1,11 +1,15 @@
 const cardFlipper = () => {
-  const button = document.getElementById("flipButton");
-  console.log(button);
+  // const button = document.getElementById("flipButton");
+  const buttons = document.querySelectorAll(".flipButton");
+  console.log(buttons);
 
-  if (button) {
-    button.addEventListener("click", (event) => {
-      const innerCard = document.querySelector(".flip-card-inner");
-      innerCard.classList.toggle("rotated");
+  if (buttons) {
+    buttons.forEach(function(button){
+      button.addEventListener("click", (event) => {
+        console.log(event);
+        const innerCard = document.querySelector(".flip-card-inner");
+        innerCard.classList.toggle("rotated");
+      })
     })
   }
 }

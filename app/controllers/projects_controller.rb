@@ -67,7 +67,8 @@ class ProjectsController < ApplicationController
       format.pdf do
         render pdf: "#{@project.name}",
           template: "projects/show.html.erb",
-          layout: "pdf.html"
+          layout: "pdf.html",
+          encoding: "UTF-8"
       end
     end
   end

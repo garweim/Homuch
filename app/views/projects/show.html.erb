@@ -142,7 +142,7 @@
                 </div>
               </div>
               <div class= "center-btn">
-                <button id="flipButton">Calculate ROI</button>
+                <button class="flipButton">Calculate ROI</button>
               </div>
             </div>
             <div class="flip-card-back">
@@ -151,11 +151,19 @@
                     <p id="estimate-details-title">CHOOSE ROI RATE TO CALCULATE YOUR INVESTMENT</p>
                         <%= simple_form_for :investment_calculation, url: new_investment_project_path(@project), method: :get, remote: true do |f| %>
                           <%= f.input :rate, collection: ["3%","4%","5%","6%","7%","8%","9%","10%"] %>
+                          <div class="text-align-bla">
                           <%= f.submit "Calculate Investment", id: "btn-green"  %>
+                          </div>
                         <% end %>
-                        <%= link_to 'Download your estimate on a PDF format', project_path(@project, format: :pdf) %>
                     <div id="new_investment_calculation"></div>
+                    <div class= "center-btn">
+                      <%#= link_to edit_project_path(project) do  %>
+                        <!-- <i class="fas fa-arrow-circle-left"></i> -->
+                      <%# end %>
+                        <button class="flipButton back"> < </button>
+                    </div>
                 </div>
+
             </div>
           </div>
         </div>
@@ -216,6 +224,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="container-show-cards" id="center-pdf">
+      <%= link_to 'Download PDF', project_path(@project, format: :pdf), id: "btn-green" %>
     </div>
  </div>
 </div>

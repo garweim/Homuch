@@ -67,7 +67,7 @@
   color: #878787;
 }
 
-#flipButton {
+.flipButton {
   padding: 0.6rem 1rem;
   font-size: 15px;
   font-weight: bold;
@@ -78,8 +78,19 @@
   text-align: center;
 }
 
-#flipButton:hover {
+.flipButton:hover {
   background-color: #EF5B5B;
+}
+
+.back {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #60bd63;
+}
+
+.back:hover {
+  background-color: #80d483;
 }
 
 .center-btn {
