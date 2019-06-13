@@ -71,8 +71,17 @@
   padding: 0.6rem 1rem;
   font-size: 15px;
   font-weight: bold;
-  background-color: transparent;
   border-radius: 5px;
-  color: black;
   text-decoration: none;
+  background-color: #FF2934;
+  color: white;
+  text-align: center;
+}
+
+#flipButton:hover {
+  background-color: #EF5B5B;
+}
+
+.center-btn {
+  text-align: center;
 }

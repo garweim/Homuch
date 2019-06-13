@@ -17,6 +17,10 @@ class RoiInvestmentCalculator
     (@rental_market_price * 12) / @total_invest
   end
 
+  def roi_offer_price(desired_roi)
+    (investment_estimate(desired_roi) - renovation_price) / 1.15
+  end
+
   def rental_market_price
     filtered_array = RentalMarket.where(
       zipcode: @project.zipcode,
