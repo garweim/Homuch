@@ -21,6 +21,10 @@ class Project < ApplicationRecord
   def short_address
     street_and_nr.split(",").first
   end
+
+  def spaces_on(attribute)
+    attribute.to_s.gsub(/\D/, '').reverse.gsub(/.{3}/, '\0 ').reverse
+  end
   # def build_estimate
 
   #   #do stuff create estimate
