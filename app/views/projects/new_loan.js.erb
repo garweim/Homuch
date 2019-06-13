@@ -1,8 +1,9 @@
 function updateDOM() {
   const loanDiv = document.getElementById("loan-calculation");
   loanDiv.innerHTML = `
-
-    <p>Considering your amount of capital, you will have to pay <%= number_to_currency(@credit_cost, unit:"€", precision: 0, delimiter: ".") %> over the course of <%= @loan_years %> years. It means a monthly payment of <%= number_to_currency(((@loan_amount + @credit_cost) / (@loan_years * 12)).round(1), unit:"€", precision: 0, delimiter: ".") %>.</p>   `
+    <div class="padding-loan">
+    <p>Monthly payment : <strong><%= number_to_currency(((@loan_amount + @credit_cost) / (@loan_years * 12)).round(1), unit:"€", precision: 0, delimiter: ".") %></strong></p>
+    </div>   `
 
 }
 
