@@ -50,7 +50,7 @@
                 </div>
                 <div class="pictos-details-align">
                   <%= image_tag ("estimate.png") %>
-                  <p><%= project.estimates.last&.market_price %>€</p>
+                  <p><%= number_to_currency(project.estimates.last&.market_price, unit: "€", precision: 0, delimiter: ".") %></p>
                 </div>
               </div>
             </div>
