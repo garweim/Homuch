@@ -138,14 +138,16 @@
                   </div>
                   <div class="details-value">
                     <h5><strong><%= ((@detailed_estimate * 0.15) + @detailed_estimate).to_i + @renovation_details.total_price%> €</strong></h5>
-                    <button id="flipButton">Calculate ROI</button>
                   </div>
                 </div>
+              </div>
+              <div class= "center-btn">
+                <button id="flipButton">Calculate ROI</button>
               </div>
             </div>
             <div class="flip-card-back">
               <div class="flip-card-front">
-                <h6> YOUR RETURN ON INVESTMENT ESTIMATE IS A RATE OF <%=@roi_estimate.round(2)*100 %>% </h6>
+                <h6> WITH CURRENT ESTIMATE YOU GET A R.O.I OF <%=@roi_estimate.round(2)*100 %>% </h6>
                     <p id="estimate-details-title">CHOOSE ROI RATE TO CALCULATE YOUR INVESTMENT</p>
                         <%= simple_form_for :investment_calculation, url: new_investment_project_path(@project), method: :get, remote: true do |f| %>
                           <%= f.input :rate, collection: ["3%","4%","5%","6%","7%","8%","9%","10%"] %>
@@ -177,7 +179,7 @@
               <div
                 id="map"
                 style="width: 40%;
-                height: 26.2rem !important;"
+                height: 28.2rem !important;"
                 data-markers="<%= @markers.to_json %>"
                 data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
               </div>
