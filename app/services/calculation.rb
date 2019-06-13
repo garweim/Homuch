@@ -15,8 +15,3 @@ class Calculation
     sum/filtered_array.count
   end
 end
-
-# if €/sqm == 0
-#   render the same page
-# else
-#   sum/sqm
