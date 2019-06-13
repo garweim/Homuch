@@ -27,7 +27,7 @@ class Project < ApplicationRecord
   end
 
   def simple_price
-    self.estimates.last.simple_price
+    self.estimates.last.simple_price || self.estimates.last.market_price
   end
   # def build_estimate
 

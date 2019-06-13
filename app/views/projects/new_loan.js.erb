@@ -4,4 +4,5 @@ function updateDOM() {
     <p>Considering your amount of capital, you will have to pay <%= @credit_cost %>€ over the course of <%= @loan_years %> years. It means a monthly payment of <%= ((@loan_amount + @credit_cost) / (@loan_years * 12)).round(1) %>€.</p>   `
 }
 
-updateDOM()
+console.log("hiii");
+updateDOM();

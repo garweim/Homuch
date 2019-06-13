@@ -30,9 +30,6 @@ class ProjectsController < ApplicationController
         project: @project
       )
       if @project.save && @estimate.save
-        # @project.estimates.create(
-        #   market_price: @detailed_estimate,
-        #   simple_price: @simple_estimate)
         if params[:pictures]
           params[:pictures]['photo'].each do |a|
             @picture = @project.pictures.create!(photo: a)
@@ -100,7 +97,6 @@ class ProjectsController < ApplicationController
     @loan_rate = params[:loan_calculation][:rate_in_percentage].to_f
     @loan_years = params[:loan_calculation][:years].to_i
     @estimate = @project.estimates.last
-
     @capital = params[:loan_calculation][:capital].to_f
     if @capital
       @loan_amount = @estimate.market_price - @capital

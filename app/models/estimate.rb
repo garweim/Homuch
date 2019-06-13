@@ -7,9 +7,9 @@ class Estimate < ApplicationRecord
   end
 
   def credit_cost(rate_in_percentage, years, capital = self.market_price)
-    rate = rate / 100
-    m = (capital * (rate / 12))
-    p = 1 - (1 + (rate / 12))**-years
+    rate_in_percentage = rate_in_percentage / 100
+    m = (capital * (rate_in_percentage / 12))
+    p = 1 - (1 + (rate_in_percentage / 12))**-years
     return (m / p)
   end
 end
