@@ -12,3 +12,5 @@ class Estimate < ApplicationRecord
     return (m / p)
   end
 end
+# estimate = project.estimates.last
+# estimate.spaces_on(market_price)

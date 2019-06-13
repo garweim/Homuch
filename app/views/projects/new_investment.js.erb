@@ -1,10 +1,10 @@
 function updateDOM() {
   const investmentDiv = document.getElementById("new_investment_calculation");
   investmentDiv.innerHTML = `
-    <p>For this asset, the average rental market is <%= @roi_service.rental_market_price %> €. /month
+    <p>For this asset, the average rental market is <%= number_to_currency(@roi_service.rental_market_price, unit:"€", precision: 0, delimiter: ".") %>/month.
     You desire to have a <%= @desired_rate %> rate of return on investment.
     On a base of this ROI, the estimate of the buying price should be
-    <%= @total_investment %> </p>
+    <%= number_to_currency(@total_investment, unit:"€", precision: 0, delimiter: ".") %> </p>
   `
 }
 updateDOM()
