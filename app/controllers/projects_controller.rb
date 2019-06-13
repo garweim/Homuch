@@ -95,10 +95,17 @@ class ProjectsController < ApplicationController
     # instead of this controller rendering a view;
     # it will render a javascript template
     #  -> new_loan.js.erb
-    @loan_rate = params[:loan_calculation][:rate].to_f
+    @loan_rate = params[:loan_calculation][:rate_in_percentage].to_f
     @loan_years = params[:loan_calculation][:years].to_i
     @estimate = @project.estimates.last
-    @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years).round(1)
+
+    @capital = params[:loan_calculation][:capital].to_f
+    if @capital
+      @loan_amount = @estimate.market_price - @capital
+      @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years, @loan_amount).round(1)
+    else
+      @credit_cost = @estimate.credit_cost(@loan_rate, @loan_years).round(1)
+    end
     #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
   end
 
