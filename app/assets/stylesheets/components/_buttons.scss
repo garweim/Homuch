@@ -40,11 +40,23 @@
   top: 1.3rem;
   right: 1rem;
   font-size: 13px;
-  color: #878787;
+  color: #20BC62 !important;
 }
 
-#edit-btn:hover {
-  color: black;
+.far {
+  color: #20BC62 !important;
+}
+
+.fas {
+  color: #20BC62 !important;
+}
+
+.far:hover {
+  color: #80d483 !important;
+}
+
+.fas:hover {
+  color: #80d483 !important;
 }
 
 #delete-btn {
@@ -55,6 +67,12 @@
   color: #878787;
 }
 
-#delete-btn:hover {
+#flipButton {
+  padding: 0.6rem 1rem;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: transparent;
+  border-radius: 5px;
   color: black;
+  text-decoration: none;
 }
