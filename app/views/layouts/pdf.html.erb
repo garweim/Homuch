@@ -2,60 +2,104 @@
 <html>
 <head>
 <title>PDF</title>
-  <%= wicked_pdf_stylesheet_link_tag "application" %>
+  <%#= wicked_pdf_stylesheet_link_tag "application" %>
 </head>
 <body>
 
-        <p id="estimate-details-title">FINANCIAL DETAILS</p>
+<style>
+  h1 {
+    font-size: 70px;
+    text-align: center;
+  }
+  h2 {
+    font-size: 70px;
+    text-align: center;
+  }
+  h4 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 35px;
+  color: #095228;
+}
 
+h5 {
+  font-size: 66px;
+  font-family: 'Roboto', sans-serif;
+  margin-right: 200px;
+}
 
-              <h6> YOUR ESTIMATE : </h6>
+h6 {
+  color: #60bd63;
+}
 
-                <h4><%= @detailed_estimate %>€</h4>
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;
+  margin: 0px !important;
+  color: #1A1D1A;
+}
+</style>
 
-               <!--  <button id="flipButton">flip me to calculate ROI!</button> -->
+<div class="container">
+  <h1>FINANCIAL DETAILS</h1>
+  <br>
+  <br>
+  <br>
+  <h2> YOUR ESTIMATE</h2>
+  <h2><%= @detailed_estimate %>€</h4>
 
-                    <h5><strong>TOTAL ASSET PRICE</strong></h5>
-                    <p>Market Value </p>
-                    <p>Registration Fees </p>
-
-                    <h5><strong><%= ((@detailed_estimate * 0.15) + @detailed_estimate).to_i %> €</strong></h5>
-                    <p><%= @detailed_estimate %> € </p>
-                    <p><%= (@detailed_estimate * 0.15).to_i  %> €</p>
-
-                    <h5><strong>RENOVATION COSTS</strong></h5>
-                    <p>Heating: </p>
-                    <p>Electricity: </p>
-                    <p>Sanitation: </p>
-                    <p>Kitchen: </p>
-
-                    <h5><strong><%= @renovation_details.total_price  %> €</strong></h5>
-                    <% if @project.heating %>
-                        <p><%= @renovation_details.heating_price %> €</p>
-                      <% else %>
-                        <p>0 €</p>
-                      <% end %>
-                      <% if @project.electricity %>
-                        <p><%= @renovation_details.electricity_price %> €</p>
-                      <% else %>
-                        <p>0 €</p>
-                      <% end %>
-                      <% if @project.sanitation %>
-                        <p><%= @renovation_details.sanitation_price %> €</p>
-                      <% else %>
-                        <p>0 €</p>
-                      <% end %>
-                      <% if @project.kitchen %>
-                        <p><%= @renovation_details.kitchen_price %> €</p>
-                      <% else %>
-                        <p>0 €</p>
-                      <% end %>
-
-                    <h5><strong>TOTAL BUDGET</strong></h5>
-
-                    <h5><strong><%= ((@detailed_estimate * 0.15) + @detailed_estimate).to_i + @renovation_details.total_price%> €</strong></h5>
-
-                <h6> YOUR RETURN ON INVESTMENT ESTIMATE IS A RATE OF <%=@roi_estimate.round(2)*100 %>% </h6>
-</body>
-</html>
-
+    <table>
+    <thead>
+    </thead>
+    <tbody>
+        <tr>
+            <td><h5><strong>TOTAL ASSET PRICE</strong></h5></td>
+            <td><h5><strong><%= ((@detailed_estimate * 0.15) + @detailed_estimate).to_i %> €</strong></h5></td>
+        </tr>
+        <tr>
+            <td><p>Market Value </p></td>
+            <td><p><%= @detailed_estimate %> € </p></td>
+        </tr>
+        <tr>
+            <td><p>Registration fees</p></td>
+            <td><p><%= (@detailed_estimate * 0.15).to_i  %> €</p></td>
+        </tr>
+        <tr>
+            <td><h5><strong>RENOVATION COSTS</strong></h5></td>
+            <td><h5><strong><%= @renovation_details.total_price  %> €</strong></h5></td>
+        </tr>
+        <tr>
+            <td><p>Heating</p></td>
+            <td><% if @project.electricity %>
+                  <p><%= @renovation_details.electricity_price %> €</p>
+                <% else %>
+                  <p>0 €</p>
+                <% end %></td>
+        </tr>
+        <tr>
+            <td><p>Electricity</p></td>
+            <td><% if @project.sanitation %>
+                  <p><%= @renovation_details.sanitation_price %> €</p>
+                <% else %>
+                  <p>0 €</p>
+                <% end %></td>
+        </tr>
+        <tr>
+            <td><p>Sanitation</p></td>
+            <td><% if @project.kitchen %>
+                  <p><%= @renovation_details.kitchen_price %> €</p>
+                <% else %>
+                  <p>0 €</p>
+                <% end %></td>
+        </tr>
+        <tr>
+            <td><p>Kitchen</p></td>
+            <td><% if @project.heating %>
+                  <p><%= @renovation_details.heating_price %> €</p>
+                <% else %>
+                  <p>0 €</p>
+                <% end %></td>
+        </tr>
+    </tbody>
+</table>
+</div>
