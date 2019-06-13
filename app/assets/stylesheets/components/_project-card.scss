@@ -97,7 +97,7 @@
 }
 
 .card-asset-details {
-  height: 26.2rem;
+  height: 28.2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   background-color: white;
@@ -166,7 +166,7 @@ a:hover {
 
 .flip-card {
 
-  height: 26.2rem;
+  height: 28.2rem;
   border-radius: 8px;
   perspective: 1000px;
   &.card-details-flip {
@@ -223,11 +223,4 @@ a:hover {
 /* Style the back side */
 .flip-card-back {
   transform: rotateY(180deg);
-}
-.card-asset-details{
-  height: 26.2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 8px;
 }
