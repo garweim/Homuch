@@ -24,7 +24,9 @@
                <i class="fas fa-trash-alt"></i>
                <% end %>
               </div>
+              <%= link_to project_path(project), :action => 'go' do %>
               <h6><%= project.name %></h6>
+              <% end %>
               <div class="pictos-details">
                 <div class="pictos-details-align">
                   <%= image_tag ("address.png") %>
