@@ -1,8 +1,0 @@
-function updateDOM() {
-  const investmentDiv = document.getElementById("investment-calculation");
-  investmentDiv.innerHTML = `
-    <p>For a return of investment of  <%= @estimate.desired_roi %>% your investment according to the market value should be around
-     <%= (estimate.@rent_market_price * 12) / estimate.@desired_roi %>€.</p>   `
-}
-
-updateDOM()

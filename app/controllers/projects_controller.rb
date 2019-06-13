@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :new_loan]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :new_loan, :new_investment]
   skip_before_action :authenticate_user!, only: [:new, :create]
 
   def index
@@ -58,7 +58,7 @@ class ProjectsController < ApplicationController
     @simple_estimate = perform_simple_estimate
     @detailed_estimate = perform_detailed_estimate
     @renovation_details = ::RenovationCalculator.new(@project)
-    @roi_estimate = ::RoiCalculation.new.call(@project)
+    @roi_estimate = ::RoiInvestmentCalculator.new(@project).roi_estimate
     # @last_estimate = @project.estimates.last
     @markers = map_single_project
     @pictures = @project.pictures
@@ -104,12 +104,13 @@ class ProjectsController < ApplicationController
     #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
   end
 
-  def investment
-    # @investment = params[:investment_calculation][:project]
-    @investment = params[:investment_calculation][:desired_roi].to_f
-    @estimate_investment = @project.estimates.last
-    @total_investment = @estimate_investment.total_investment(@project, @desired_roi).round(1)
-    #@monthly_payment = (@estimate + @credit_cost) / (@loan_years * 12)
+  def new_investment
+    # instead of this controller rendering a view;
+    # it will render a javascript template
+    #  -> new_investment.js.erb
+    @roi_service = ::RoiInvestmentCalculator.new(@project)
+    @desired_rate = params[:investment_calculation][:rate].to_f
+    @total_investment = @roi_service.investment_estimate(@desired_rate)
   end
 
   private

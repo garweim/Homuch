@@ -147,11 +147,12 @@
               <div class="flip-card-front">
                 <h6> YOUR RETURN ON INVESTMENT ESTIMATE IS A RATE OF <%=@roi_estimate.round(2)*100 %>% </h6>
                     <p id="estimate-details-title">CHOOSE ROI RATE TO CALCULATE YOUR INVESTMENT</p>
-                        <%= simple_form_for :investment_calculation, url: investment_project_project_path(@project), remote: true do |f| %>
+                        <%= simple_form_for :investment_calculation, url: new_investment_project_path(@project), method: :get, remote: true do |f| %>
                           <%= f.input :rate, collection: ["3%","4%","5%","6%","7%","8%","9%","10%"] %>
                           <%= f.submit "Calculate Investment", id: "btn-green"  %>
                         <% end %>
-                    <div id="investment_calculation"></div>
+                        <%= link_to 'Download your estimate on a PDF format', project_path(@project, format: :pdf) %>
+                    <div id="new_investment_calculation"></div>
                 </div>
             </div>
           </div>
@@ -168,7 +169,7 @@
           <p><strong><%#= "Electricity Cost: #{@renovation_details.electricity_price} " if @project.electricity %> €</strong> </p>
           <p>Total Renovation Cost: <%= @renovation_details.total_price  %> €</p>
           <p> <strong> </strong></p> -->
-              <%#= link_to 'Download your estimate on PDF format', project_path(@project, format: :pdf) %>
+
       <div class="col-12 col-md-4">
         <p id="estimate-details-title">LOCATION</p>
           <div class= "card-asset-details">
