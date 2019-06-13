@@ -14,6 +14,10 @@
 
 }
 
+.back-card-text {
+  padding: 1rem 0rem;
+}
+
 .simple-estimate-container {
   width: 100%;
   height: 100%;
@@ -218,6 +222,10 @@ a:hover {
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
   color: black;
+}
+
+.text-align-bla {
+  text-align: -webkit-center;
 }
 
 /* Style the back side */

@@ -1,10 +1,12 @@
 function updateDOM() {
   const investmentDiv = document.getElementById("new_investment_calculation");
   investmentDiv.innerHTML = `
-    <p>For this asset, the average rental market is <%= @roi_service.rental_market_price %> €. /month
-    To reach a <%= @desired_rate.to_i %>% return on investment, you can invest up to
-    <%= @total_investment.to_i %>€ on this asset. Deducing the renovations and the registration fees,
-    it means you should offer <%= ((@total_investment - @roi_service.renovation_price) / 1.15).to_i %>€.</p>
+    <div class="back-card-text">
+      <p>Average rental market: <strong><%= @roi_service.rental_market_price %> €/month</strong></p>
+      <p>Desired ROI: <strong><%= @desired_rate.to_i %>%</strong></p>
+      <p>Total investiment: <strong><%= @total_investment.to_i %>€</strong></p>
+      <p>Bid to seller: <strong><%= ((@total_investment - @roi_service.renovation_price) / 1.15).to_i %>€</strong></p>
+    </div>
   `
 }
 updateDOM()
