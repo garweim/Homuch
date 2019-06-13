@@ -22,8 +22,12 @@ class Project < ApplicationRecord
     street_and_nr.split(",").first
   end
 
-  def spaces_on(attribute)
-    attribute.to_s.gsub(/\D/, '').reverse.gsub(/.{3}/, '\0 ').reverse
+  def surface_approx
+    self.surface-20..self.surface+20
+  end
+
+  def simple_price
+    self.estimates.last.simple_price
   end
   # def build_estimate
 

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :projects do
     member do
       post "new_loan"
+      get "new_investment"
     end
     resources :estimates
   end
